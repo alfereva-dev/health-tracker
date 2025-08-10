@@ -1,0 +1,38 @@
+.ff_box {
+  display: flex;
+}
+
+.ff_label {
+  color: var(--secondary-color);
+}
+
+.ff_input {
+  display: flex;
+}
+
+.emoji_scale {
+  display: flex;
+  flex: 8;
+}
+
+.emoji_button {
+  width: auto;
+}
+
+.emoji_icon {
+  height: 20px;
+  width: 20px;
+  transition: filter 0.2s ease;
+}
+
+.emoji_button:not(.is-selected) .emoji_icon {
+  filter: grayscale(100%) brightness(70%);
+}
+
+.emoji_button.is-selected .emoji_icon {
+  filter: none;
+}
+
+textarea {
+  resize: none;
+}

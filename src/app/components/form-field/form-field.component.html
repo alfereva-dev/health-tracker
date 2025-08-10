@@ -1,0 +1,71 @@
+@if (field) {
+  <div class="ff_box">
+    @if (!disableLabel) {
+      <span class="ff_label">{{ field.label ?? "" | translate }}</span>
+    }
+    <span class="ff_input">
+      @switch (field.type) {
+        @case (InputType.NUMBER) {
+          <input
+            [id]="field.id"
+            type="number"
+            class="ff_number"
+            [formControl]="field.formControl!"
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [min]="0"
+          />
+          @if (field.metrics) {
+            <span class="ff_info_label">{{
+              field.metricsLabel ?? "" | translate
+            }}</span>
+          }
+        }
+        @case (InputType.SLIDER) {}
+        @case (InputType.TEXT) {
+          <textarea
+            [id]="field.id"
+            class="ff_textarea"
+            [maxLength]="500"
+            [class]="field.class ?? ''"
+            [formControl]="field.formControl!"
+          ></textarea>
+        }
+        @case (InputType.CHECKBOX) {
+          <input
+            [id]="field.id"
+            type="checkbox"
+            class="ff_checkbox"
+            [class]="field.class ?? ''"
+            [formControl]="field.formControl!"
+          />
+        }
+        @case (InputType.SELECT_DROPDOWN) {}
+        @case (InputType.MULTIPLE_CHOICE) {}
+        @case (InputType.TIMER) {}
+        @case (InputType.DURATION) {}
+        @case (InputType.EMOJI_SCALE) {
+          <div
+            class="emoji_scale"
+            role="radiogroup"
+            aria-label="Mood"
+            [id]="field.id"
+          >
+            @for (e of emojis; track e.value) {
+              <button
+                class="emoji_button"
+                [class.is-selected]="selected === e.value"
+                (click)="pick(e.value)"
+                [attr.aria-checked]="selected === e.value"
+                [title]="e.alt"
+              >
+                <img class="emoji_icon" [ngSrc]="e.src" [alt]="e.alt" />
+              </button>
+            }
+          </div>
+        }
+      }
+    </span>
+  </div>
+}

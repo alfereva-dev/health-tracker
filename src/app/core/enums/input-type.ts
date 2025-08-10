@@ -1,0 +1,11 @@
+export enum InputType {
+  NUMBER,
+  SLIDER,
+  TEXT,
+  CHECKBOX,
+  SELECT_DROPDOWN,
+  MULTIPLE_CHOICE,
+  TIMER,
+  DURATION,
+  EMOJI_SCALE
+}

@@ -6,6 +6,5 @@ export enum InputType {
   SELECT_DROPDOWN,
   MULTIPLE_CHOICE,
   TIMER,
-  DURATION,
-  EMOJI_SCALE
+  EMOJI_SCALE,
 }

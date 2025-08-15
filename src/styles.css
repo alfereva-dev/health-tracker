@@ -1,10 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
 :root {
-  --background-color: #303543;
-  --header-color: #232732;
-  --primary-color: #FF7A30;
-  --secondary-color: #FFFFFF;
-  --select-color: #FEFFC0;
-  --unselect-color1: #939B9D;
-  --unselect-color2: #50525A;
+  --background-color: #26282f;
+  --header-color: #1d1e22;
+  --primary-color: #ff7a30;
+  --secondary-color: #ffffff;
+  --select-color: #feffc0;
+  --unselect-color1: #939b9d;
+  --unselect-color2: #50525a;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: Arial, sans-serif;
+  scrollbar-width: none;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.primary-box {
+  border: 3.5px solid var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  gap: 8px;
+  padding: 10px;
+  width: 100%;
+}
+
+.secondary-title {
+  color: var(--secondary-color);
+  font-size: 1.75em;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.invalid {
+  border: 1px solid red !important;
 }

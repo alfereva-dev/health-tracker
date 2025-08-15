@@ -5,6 +5,7 @@ export class FormField {
   id?: number | string;
   label?: string;
   type?: InputType;
+  value?: string | number;
   formControl?: FormControl;
   options?: SelectFieldOption[];
   infoText?: string;

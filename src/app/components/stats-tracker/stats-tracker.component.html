@@ -1,0 +1,14 @@
+<div
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  [cdkDropListDisabled]="!editable"
+>
+  <div class="secondary-title">Health Tracker</div>
+  <div class="stats-box">
+    @for (stat of baseFormFields; track stat) {
+      <div class="stat-item" cdkDrag>
+        <app-form-field [field]="stat"></app-form-field>
+      </div>
+    }
+  </div>
+</div>

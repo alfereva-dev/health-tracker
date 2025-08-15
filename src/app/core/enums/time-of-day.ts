@@ -1,0 +1,8 @@
+export enum TimeOfDay {
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+  EVENING = 'EVENING',
+  NIGHT = 'NIGHT',
+  ALL_DAY = 'ALL_DAY',
+  CUSTOM_TIME = 'CUSTOM_TIME',
+}

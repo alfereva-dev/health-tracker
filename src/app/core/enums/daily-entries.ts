@@ -1,0 +1,5 @@
+export enum DailyEntries {
+  ONCE_DAY = 'ONCE_DAY',
+  SEVERAL_TIMES_DAY = 'SEVERAL_TIMES_DAY',
+  FREE_ENTRY = 'FREE_ENTRY',
+}

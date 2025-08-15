@@ -1,7 +1,7 @@
 @if (field) {
   <div class="ff_box">
     @if (!disableLabel) {
-      <span class="ff_label">{{ field.label ?? "" | translate }}</span>
+      <span class="ff_label">{{ field.label }}</span>
     }
     <span class="ff_input">
       @switch (field.type) {
@@ -22,7 +22,19 @@
             }}</span>
           }
         }
-        @case (InputType.SLIDER) {}
+        @case (InputType.SLIDER) {
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            class="ff_slider"
+            [value]="getCurrentSliderValue()"
+            (input)="onSliderInput($event)"
+            [style.background]="sliderBackground"
+            [formControl]="field.formControl!"
+          />
+        }
         @case (InputType.TEXT) {
           <textarea
             [id]="field.id"
@@ -41,10 +53,43 @@
             [formControl]="field.formControl!"
           />
         }
-        @case (InputType.SELECT_DROPDOWN) {}
-        @case (InputType.MULTIPLE_CHOICE) {}
+        @case (InputType.SELECT_DROPDOWN) {
+          <ng-select
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [formControl]="field.formControl!"
+            [class]="field.class ?? ''"
+            [clearable]="false"
+            class="ff_dropdown"
+            bindLabel="name"
+          >
+            @for (option of field.options; track option.value) {
+              <ng-option [value]="option.value">
+                {{ option.label }}
+              </ng-option>
+            }
+          </ng-select>
+        }
+        @case (InputType.MULTIPLE_CHOICE) {
+          <ng-select
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [formControl]="field.formControl!"
+            [class]="field.class ?? ''"
+            [clearable]="false"
+            [multiple]="true"
+            class="ff_dropdown"
+          >
+            @for (option of field.options; track option.value) {
+              <ng-option [value]="option.value">
+                {{ option.label }}
+              </ng-option>
+            }
+          </ng-select>
+        }
         @case (InputType.TIMER) {}
-        @case (InputType.DURATION) {}
         @case (InputType.EMOJI_SCALE) {
           <div
             class="emoji_scale"
@@ -60,7 +105,7 @@
                 [attr.aria-checked]="selected === e.value"
                 [title]="e.alt"
               >
-                <img class="emoji_icon" [ngSrc]="e.src" [alt]="e.alt" />
+                <img class="emoji_icon" [src]="e.src" [alt]="e.alt" />
               </button>
             }
           </div>

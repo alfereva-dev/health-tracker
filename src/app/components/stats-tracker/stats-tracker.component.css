@@ -1,0 +1,13 @@
+.primary-box {
+  min-height: 15vh;
+  width: fit-content;
+}
+
+.stats-box {
+  margin-top: 10px;
+}
+
+.stat-item {
+  color: var(--secondary-color);
+  font-size: 16px;
+}

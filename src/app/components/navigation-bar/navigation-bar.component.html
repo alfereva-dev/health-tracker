@@ -1,0 +1,12 @@
+<div class="nav-bar-box">
+  @for (b of navButtons; track b.key) {
+    <button
+      class="nav-bar-button"
+      [routerLink]="b.route"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ b.key | translate }}
+    </button>
+  }
+</div>

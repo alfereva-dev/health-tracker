@@ -1,6 +1,5 @@
-.overview-box {
-  display: flex;
-  gap: 10px;
+.primary-box {
+  min-height: 640px;
 }
 
 full-calendar {

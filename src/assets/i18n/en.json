@@ -71,7 +71,9 @@
     "show_in_graph": "Show in graph",
     "calendar_heatmap": "Calendar heatmap",
     "habit_cards": "Habit cards",
-    "create_new_stat": "Create a new stat"
+    "create_new_stat": "Create a new stat",
+    "selected": "Selected",
+    "available": "Available"
   },
   "STATUS": {
     "loading": "Loading...",

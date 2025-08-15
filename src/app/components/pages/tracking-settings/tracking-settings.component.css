@@ -1,0 +1,36 @@
+.primary-box {
+  display: flex;
+  align-items: stretch;
+  min-height: 640px;
+}
+
+.action-btn-box {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 8px;
+}
+
+.action-btn {
+  border: 2px solid var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.action-btn:hover {
+  border-color: var(--select-color);
+}
+
+.stat-btn {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.stat-btn:hover {
+  border-color: var(--select-color);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 25vh;
+}

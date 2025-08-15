@@ -42,6 +42,16 @@ app-root {
   width: 100%;
 }
 
+.page-box {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  height: 1em;
+  width: 1em;
+}
+
 .secondary-title {
   color: var(--secondary-color);
   font-size: 1.75em;
@@ -52,4 +62,21 @@ app-root {
 
 .invalid {
   border: 1px solid red !important;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  gap: 8px;
+  font-size: 1em;
+  border-radius: 0.4vw;
+  height: 5vh;
+  min-width: 5vw;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
 }

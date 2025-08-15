@@ -1,1 +1,45 @@
-<p>tracking-settings works!</p>
+<div class="page-box">
+  <app-stats-tracker class="primary-box" [editable]="true"></app-stats-tracker>
+  <div class="primary-box">
+    <div id="selected-stat">
+      <div class="secondary-title">{{ "TITLE.selected" | translate }}</div>
+      <div class="chips">
+        @for (s of selectedList(); track s.id) {
+          <button class="btn stat-btn" (click)="unselect(s.id)">
+            {{ s.name }}
+            <img
+              src="assets/icons/action/pin-icon.svg"
+              alt="pin"
+              class="icon"
+            />
+          </button>
+        }
+      </div>
+    </div>
+    <div id="available-stat">
+      <div class="secondary-title">{{ "TITLE.available" | translate }}</div>
+      <div class="chips">
+        @for (s of unselectedList(); track s.id) {
+          <button class="btn stat-btn" (click)="select(s.id)">
+            {{ s.name }}
+            <img
+              src="assets/icons/action/plus-icon.svg"
+              alt="pin"
+              class="icon"
+            />
+          </button>
+        }
+      </div>
+    </div>
+    <div class="action-btn-box">
+      <button class="btn action-btn">
+        {{ "BUTTON.save" | translate }}
+        <img src="assets/icons/action/plus-icon.svg" alt="plus" class="icon" />
+      </button>
+      <button class="btn action-btn">
+        {{ "BUTTON.create_new_stat" | translate }}
+        <img src="assets/icons/action/edit-icon.svg" alt="edit" class="icon" />
+      </button>
+    </div>
+  </div>
+</div>

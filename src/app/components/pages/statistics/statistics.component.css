@@ -1,0 +1,151 @@
+.primary-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hidden-scrollbar {
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.primary-box::-webkit-scrollbar {
+  display: none;
+}
+
+#stats-chart {
+  display: unset;
+  width: auto;
+}
+
+#filter {
+  display: flex;
+  width: 35vw;
+  max-height: 30vh;
+}
+
+#heatmap {
+  display: flex;
+  flex-direction: column;
+  max-height: 20vh;
+  width: 35vw;
+}
+
+#habit-cards {
+  display: flex;
+  max-height: 20vh;
+  width: 35vw;
+}
+
+.infobox {
+  gap: 1vw;
+  height: auto;
+  width: unset;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  color: var(--secondary-color);
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.action-box::-webkit-scrollbar {
+  display: none;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.habit-box {
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: 10px;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
+
+.filter-box::-webkit-scrollbar {
+  display: none;
+}
+
+.month-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--unselect-color1);
+  border-radius: 8px;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.day-label {
+  width: 32px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.icons {
+  display: flex;
+  gap: 6px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.icons::-webkit-scrollbar {
+  display: none;
+}
+
+.emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.close-box {
+  height: fit-content;
+}

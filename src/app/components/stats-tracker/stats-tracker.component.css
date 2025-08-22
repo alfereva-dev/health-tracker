@@ -11,3 +11,14 @@
   color: var(--secondary-color);
   font-size: 16px;
 }
+
+.btn {
+  height: 3vh;
+  min-width: 3vh;
+  border: none;
+}
+
+.edit-box {
+  position: absolute;
+  justify-self: right;
+}

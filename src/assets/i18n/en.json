@@ -26,9 +26,10 @@
     "morning": "Morning",
     "afternoon": "Afternoon",
     "evening": "Evening",
+    "night": "Night",
     "custom_time": "Custom time",
     "every_day": "Every day",
-    "evert_n_days": "Every N days",
+    "every_n_days": "Every N days",
     "on_certain_days": "On certain days of the week",
     "manual_request": "Only at the user's request (manually)",
     "once_day": "Once a day",
@@ -36,14 +37,16 @@
     "free_entry": "Free entry",
     "week": "Week",
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "today": "Today"
   },
   "FILTER": {
     "title": "Filters by",
     "categories": "Categories",
     "type_of_tracker": "The type of tracker",
     "time_of_day": "Time of day",
-    "tags": "Tags"
+    "tags": "Tags",
+    "all": "All"
   },
   "INPUT_TYPE": {
     "number": "Number",
@@ -100,5 +103,22 @@
     "eng": "English",
     "cz": "Czech",
     "select_language": "Select language"
+  },
+  "CREATE_NEW_STAT": {
+    "name": "Name",
+    "input_type": "Input type",
+    "frequency": "Frequency",
+    "time_of_day": "Time of day",
+    "daily_entries": "Daily entries",
+    "color": "Color",
+    "icon": "Icon",
+    "category": "Category",
+    "tags": "Tags",
+    "privacy": "Privacy"
+  },
+  "CARD": {
+    "series": "Series",
+    "last_day": "The last day",
+    "completion": "Percentage of completion"
   }
 }

@@ -15,7 +15,9 @@
 
 .ff_input {
   display: flex;
+  align-items: center;
   width: 40vw;
+  gap: 8px;
 }
 
 .ff_number {
@@ -55,6 +57,9 @@
 :host ::ng-deep .ng-dropdown-panel {
   background-color: var(--background-color);
   border: 2px solid var(--secondary-color);
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.8),
+    0 6px 20px 0 rgba(0, 0, 0, 0.8);
   border-radius: 5px;
 }
 
@@ -153,4 +158,17 @@ textarea {
 .ff_slider::-moz-range-track {
   height: 20px;
   border-radius: 8px;
+}
+
+.radio-box {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-button {
+  cursor: pointer;
+}
+
+.radio-text {
+  color: var(--secondary-color);
 }

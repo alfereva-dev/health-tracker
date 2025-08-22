@@ -1,0 +1,14 @@
+<div class="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" (click)="onCloseClick()" aria-label="Close">
+      ×
+    </button>
+    <div class="secondary-title">Create a new stat</div>
+
+    <div>
+      @for (ff of formField; track ff) {
+        <app-form-field [field]="ff"></app-form-field>
+      }
+    </div>
+  </div>
+</div>

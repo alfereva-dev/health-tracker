@@ -4,6 +4,8 @@ import { TimeOfDay } from '../enums/time-of-day';
 import { DailyEntries } from '../enums/daily-entries';
 import { Category } from './category';
 import { Tag } from './tag';
+import { Colors } from '../enums/colors';
+import { Emoji } from '../enums/emoji';
 
 export interface Stat {
   id: number;
@@ -12,9 +14,15 @@ export interface Stat {
   frequency: Frequency;
   timeOfDay: TimeOfDay;
   dailyEntries: DailyEntries;
-  color: string;
-  icon: string;
+  color: Colors;
+  emoji: Emoji;
   category: Category[];
   tags: Tag[];
   privacy: boolean;
+  entries: StatEntry[];
+}
+
+export interface StatEntry<V = number | string | boolean | string[]> {
+  date: string;
+  value: V;
 }

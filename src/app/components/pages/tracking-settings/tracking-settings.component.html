@@ -36,10 +36,13 @@
         {{ "BUTTON.save" | translate }}
         <img src="assets/icons/action/plus-icon.svg" alt="plus" class="icon" />
       </button>
-      <button class="btn action-btn">
+      <button class="btn action-btn" (click)="createNewStat()">
         {{ "BUTTON.create_new_stat" | translate }}
         <img src="assets/icons/action/edit-icon.svg" alt="edit" class="icon" />
       </button>
     </div>
+    @if (isCreateOpen()) {
+      <app-create-new-stat (close)="closeCreate()"></app-create-new-stat>
+    }
   </div>
 </div>

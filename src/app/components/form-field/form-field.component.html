@@ -1,7 +1,7 @@
 @if (field) {
   <div class="ff_box">
     @if (!disableLabel) {
-      <span class="ff_label">{{ field.label }}</span>
+      <span class="ff_label">{{ field.label ?? "" | translate }}</span>
     }
     <span class="ff_input">
       @switch (field.type) {
@@ -21,6 +21,18 @@
               field.metricsLabel ?? "" | translate
             }}</span>
           }
+        }
+        @case (InputType.SMALL_STRING) {
+          <input
+            [id]="field.id"
+            type="text"
+            class="ff_number"
+            [formControl]="field.formControl!"
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [maxLength]="100"
+          />
         }
         @case (InputType.SLIDER) {
           <input
@@ -52,6 +64,9 @@
             [class]="field.class ?? ''"
             [formControl]="field.formControl!"
           />
+          <span class="ff_info_label">{{
+            field.infoText ?? "" | translate
+          }}</span>
         }
         @case (InputType.SELECT_DROPDOWN) {
           <ng-select
@@ -66,7 +81,7 @@
           >
             @for (option of field.options; track option.value) {
               <ng-option [value]="option.value">
-                {{ option.label }}
+                {{ option.label ?? "" | translate }}
               </ng-option>
             }
           </ng-select>
@@ -84,7 +99,7 @@
           >
             @for (option of field.options; track option.value) {
               <ng-option [value]="option.value">
-                {{ option.label }}
+                {{ option.label ?? "" | translate }}
               </ng-option>
             }
           </ng-select>
@@ -108,6 +123,17 @@
                 <img class="emoji_icon" [src]="e.src" [alt]="e.alt" />
               </button>
             }
+          </div>
+        }
+        @case (InputType.RADIO) {
+          <div class="radio-box">
+            <input
+              type="radio"
+              [formControl]="field.formControl!"
+              [value]="field.value"
+              class="radio-button"
+            />
+            <div class="ff_label">{{ field.infoText | translate }}</div>
           </div>
         }
       }

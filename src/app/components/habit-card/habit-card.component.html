@@ -1,0 +1,14 @@
+<div class="habit-box">
+  <div class="habit-name">{{ habit.name }} {{ habit.emoji }}</div>
+  <div class="habit-infobox">
+    <div class="info">{{ "CARD.series" | translate }}: {{ habit.series }}</div>
+    <div class="info">
+      {{ "CARD.last_day" | translate }}:
+      {{ habit.lastDay | date: "dd.MM.yyyy" }}
+    </div>
+    <div class="info">
+      {{ "CARD.completion" | translate }}:
+      {{ habit.completion * 100 | number: "1.0-0" }}%
+    </div>
+  </div>
+</div>

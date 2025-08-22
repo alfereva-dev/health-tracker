@@ -1,5 +1,6 @@
 export enum InputType {
   NUMBER,
+  SMALL_STRING,
   SLIDER,
   TEXT,
   CHECKBOX,
@@ -7,4 +8,5 @@ export enum InputType {
   MULTIPLE_CHOICE,
   TIMER,
   EMOJI_SCALE,
+  RADIO,
 }

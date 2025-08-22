@@ -10,7 +10,7 @@
 
 .nav-bar-button {
   height: 40px;
-  width: 10vw;
+  width: auto;
   font-size: 18px;
   display: flex;
   justify-content: center;

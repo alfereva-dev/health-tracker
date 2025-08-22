@@ -1,1 +1,82 @@
-<p>statistics works!</p>
+<div class="page-box">
+  <app-stats-chart
+    class="primary-box"
+    id="stats-chart"
+    [filterBy]="currentFilterBy"
+    (filters)="onChartFilters($event)"
+    (periodChange)="onPeriodChange($event)"
+  ></app-stats-chart>
+  <div class="infobox">
+    <div class="primary-box" id="filter" [class.close-box]="!openFilter">
+      <div class="title-box">
+        <div class="title">{{ "FILTER.title" | translate }}</div>
+        <button class="icon-btn" (click)="toggleBlock('openFilter')">
+          <img
+            [src]="changeIcons(openFilter)"
+            alt="action-button"
+            class="icon"
+          />
+        </button>
+      </div>
+      @if (openFilter) {
+        <div class="filter-box hidden-scrollbar">
+          @for (filter of filtersFF; track filter.value) {
+            <app-form-field
+              [field]="{
+                type: filter.type,
+                formControl: groupFilters.controls.filterBy,
+                value: filter.value,
+                infoText: filter.label,
+              }"
+            ></app-form-field>
+          }
+        </div>
+      }
+    </div>
+    <div class="primary-box" id="heatmap" [class.close-box]="!openHeatmap">
+      <div class="title-box">
+        <div class="title">{{ "TITLE.calendar_heatmap" | translate }}</div>
+        <button class="icon-btn" (click)="toggleBlock('openHeatmap')">
+          <img
+            [src]="changeIcons(openHeatmap)"
+            alt="action-button"
+            class="icon"
+          />
+        </button>
+      </div>
+      @if (openHeatmap) {
+        <div class="month-list hidden-scrollbar">
+          @for (d of days(); track d.date) {
+            <div class="day-row">
+              <div class="day-label">{{ d.day }}</div>
+              <div class="icons">
+                @for (ic of d.icons; track $index) {
+                  <div class="emoji">{{ ic }}</div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+    <div class="primary-box" id="habit-cards" [class.close-box]="!openCards">
+      <div class="title-box">
+        <div class="title">{{ "TITLE.habit_cards" | translate }}</div>
+        <button class="icon-btn" (click)="toggleBlock('openCards')">
+          <img
+            [src]="changeIcons(openCards)"
+            alt="action-button"
+            class="icon"
+          />
+        </button>
+      </div>
+      @if (openCards) {
+        <div class="habit-box hidden-scrollbar">
+          @for (h of habits(); track h.id) {
+            <app-habit-card [habit]="h"></app-habit-card>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -3,6 +3,13 @@
   (cdkDropListDropped)="drop($event)"
   [cdkDropListDisabled]="!editable"
 >
+  @if (editable) {
+    <div class="edit-box">
+      <button class="btn">
+        <img src="assets/icons/action/edit-icon.svg" alt="edit" class="icon" />
+      </button>
+    </div>
+  }
   <div class="secondary-title">Health Tracker</div>
   <div class="stats-box">
     @for (stat of baseFormFields; track stat) {

@@ -1,5 +1,7 @@
 .primary-box {
-  min-height: 640px;
+  min-height: 68vh;
+  display: flex;
+  align-items: stretch;
 }
 
 full-calendar {
@@ -40,9 +42,4 @@ full-calendar {
 full-calendar,
 .fc {
   height: 49vh;
-}
-
-.primary-box {
-  display: flex;
-  align-items: stretch;
 }

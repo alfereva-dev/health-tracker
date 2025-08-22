@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormField } from '../../core/models/form-field';
 import { InputType } from '../../core/enums/input-type';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { NgOptionComponent, NgSelectComponent } from '@ng-select/ng-select';
@@ -15,7 +15,7 @@ type EmojiOption = {
 @Component({
   selector: 'app-form-field',
   imports: [
-    TranslatePipe,
+    TranslateModule,
     ReactiveFormsModule,
     NgClass,
     NgSelectComponent,

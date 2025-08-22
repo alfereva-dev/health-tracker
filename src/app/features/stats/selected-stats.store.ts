@@ -5,12 +5,15 @@ export class SelectedStatsStore {
   private readonly _selected = signal<Set<number>>(new Set<number>());
   readonly selectedIds = computed(() => [...this._selected()].sort());
 
+  constructor() {
+    this.initFromStorage();
+  }
+
   initFromStorage(key = 'selectedStats') {
     try {
       const raw = localStorage.getItem(key);
       if (!raw) return;
-      const ids = JSON.parse(raw) as number[];
-      this._selected.set(new Set(ids));
+      this._selected.set(new Set(JSON.parse(raw) as number[]));
     } catch {}
   }
 
@@ -23,24 +26,14 @@ export class SelectedStatsStore {
   }
 
   select(id: number) {
-    if (this.has(id)) return;
-    const next = new Set(this._selected());
-    next.add(id);
-    this._selected.set(next);
+    const s = new Set(this._selected());
+    s.add(id);
+    this._selected.set(s);
   }
 
   unselect(id: number) {
-    if (!this.has(id)) return;
-    const next = new Set(this._selected());
-    next.delete(id);
-    this._selected.set(next);
-  }
-
-  toggle(id: number) {
-    this.has(id) ? this.unselect(id) : this.select(id);
-  }
-
-  setAll(ids: number[]) {
-    this._selected.set(new Set(ids));
+    const s = new Set(this._selected());
+    s.delete(id);
+    this._selected.set(s);
   }
 }

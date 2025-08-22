@@ -10,10 +10,11 @@ import {
 import { FormFieldComponent } from '../form-field/form-field.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InputType } from '../../core/enums/input-type';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-stats-tracker',
-  imports: [FormFieldComponent, CdkDrag, CdkDropList],
+  imports: [FormFieldComponent, CdkDrag, CdkDropList, TranslatePipe],
   templateUrl: './stats-tracker.component.html',
   styleUrl: './stats-tracker.component.css',
 })

@@ -72,8 +72,14 @@
       </div>
       @if (openCards) {
         <div class="habit-box hidden-scrollbar">
-          @for (h of habits(); track h.id) {
-            <app-habit-card [habit]="h"></app-habit-card>
+          @if (habitsToShow().length === 0) {
+            <div class="habit-empty">
+              {{ "INFO_TEXT.no_relevant_info" | translate }}
+            </div>
+          } @else {
+            @for (h of habits(); track h.id) {
+              <app-habit-card [habit]="h"></app-habit-card>
+            }
           }
         </div>
       }

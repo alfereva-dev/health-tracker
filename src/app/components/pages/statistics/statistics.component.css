@@ -79,10 +79,11 @@
 .filter-box {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
   gap: 10px;
   width: 100%;
   margin-top: 10px;
-  justify-content: space-evenly;
   height: 100%;
 }
 
@@ -96,6 +97,18 @@
   display: flex;
   overflow: auto;
   flex-direction: column;
+  justify-content: space-around;
+}
+
+.habit-empty {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  display: flex;
+  padding: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 6px;
+  justify-content: center;
 }
 
 .filter-box::-webkit-scrollbar {
@@ -148,4 +161,12 @@
 
 .close-box {
   height: fit-content;
+}
+
+@media (max-width: 940px) {
+  #filter,
+  #heatmap,
+  #habit-cards {
+    width: auto;
+  }
 }

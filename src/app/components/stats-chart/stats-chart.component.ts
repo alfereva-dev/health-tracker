@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   EventEmitter,
   Input,
   Output,
@@ -44,6 +45,14 @@ type FilterBy = 'categories' | 'tags' | 'time' | 'all';
   styleUrls: ['./stats-chart.component.css'],
 })
 export class StatsChartComponent {
+  constructor() {
+    effect(() => {
+      const date = this.cursor();
+      const range = this.range();
+      queueMicrotask(() => this.periodChange.emit({ date, range }));
+    });
+  }
+
   cursor = signal(new Date());
   @Output() filters = new EventEmitter<{
     filterBy: FilterBy;
@@ -165,6 +174,12 @@ export class StatsChartComponent {
         unit = 'day';
     }
 
+    const axis = {
+      grid: this.cssVar('--axis-grid'),
+      ticks: this.cssVar('--axis-ticks'),
+      border: this.cssVar('--axis-border'),
+    };
+
     return {
       responsive: true,
       maintainAspectRatio: false,
@@ -175,8 +190,17 @@ export class StatsChartComponent {
           time: { unit },
           min: min.toISOString(),
           max: max.toISOString(),
+          ticks: { color: axis.ticks, maxRotation: 0, autoSkip: true },
+          grid: { color: axis.grid, drawTicks: false },
+          border: { color: axis.border },
         },
-        y: { beginAtZero: true, grace: '5%' },
+        y: {
+          beginAtZero: true,
+          grace: '5%',
+          ticks: { color: axis.ticks },
+          grid: { color: axis.grid, drawTicks: false },
+          border: { color: axis.border },
+        },
       },
       plugins: {
         legend: { display: false },
@@ -184,6 +208,11 @@ export class StatsChartComponent {
       },
     };
   });
+
+  private cssVar(name: string, fallback = ''): string {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    return (v || fallback).trim();
+  }
 
   toggle(id: number) {
     const s = new Set(this.selected());

@@ -1,6 +1,6 @@
 <div class="chart-toolbar" style="height: 65vh">
-  <div class="range-box">
-    <div class="range-btn-box">
+  <div class="range-box hidden-scrollbar-y">
+    <div class="range-btn-box hidden-scrollbar-y">
       <button
         (click)="range.set('week')"
         class="chip"
@@ -24,7 +24,7 @@
       </button>
     </div>
 
-    <div class="range-btn-box">
+    <div class="range-btn-box hidden-scrollbar-y">
       <button class="btn-nav" (click)="today()" [disabled]="isToday()">
         {{ "PERIODICITY.today" | translate }}
       </button>
@@ -44,7 +44,7 @@
 </div>
 
 <div class="buttons-box">
-  <div class="chip-box">
+  <div class="chip-box hidden-scrollbar-y">
     @if (filterBy !== "all") {
       @if (filterBy === "time") {
         @for (td of timeOptions; track td.value) {
@@ -82,7 +82,7 @@
     }
   </div>
 
-  <div class="chip-box">
+  <div class="chip-box hidden-scrollbar-y">
     @if (filterBy === "all") {
       @for (t of trackers; track t.id) {
         <button

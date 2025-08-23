@@ -67,7 +67,8 @@
     "select_with_dropdown": "Choose one from a list - e.g. type of workout or symptom...",
     "multiple_choice": "Choose several options from a list - e.g. meals eaten, symptoms today...",
     "timer_duration": "Duration of an activity - e.g. sleep, screen time, work...",
-    "emoji_scale": "Visual scale from \uD83D\uDE01 to \uD83D\uDE21"
+    "emoji_scale": "Visual scale from \uD83D\uDE01 to \uD83D\uDE21",
+    "no_relevant_info": "There is no relevant information"
   },
   "TITLE": {
     "filters_by": "Filters by",

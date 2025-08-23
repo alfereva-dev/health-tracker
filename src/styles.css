@@ -6,6 +6,9 @@
   --select-color: #feffc0;
   --unselect-color1: #939b9d;
   --unselect-color2: #50525a;
+  --axis-grid: rgba(80, 82, 90, 0.25);
+  --axis-ticks: var(--secondary-color);
+  --axis-border: var(--unselect-color1);
 }
 
 html,
@@ -152,5 +155,15 @@ app-root {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@media (max-width: 940px) {
+  .page-box {
+    flex-direction: column;
+  }
+
+  .primary-box {
+    width: auto;
   }
 }

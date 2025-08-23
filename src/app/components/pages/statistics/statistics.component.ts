@@ -13,6 +13,7 @@ import {
 } from '../../habit-card/habit-card.component';
 import { Entry, parseLocalDate } from '../../../core/models/tracker.model';
 import { TimeOfDay } from '../../../core/enums/time-of-day';
+import { format, startOfMonth, subDays } from 'date-fns';
 
 @Component({
   selector: 'app-statistics',
@@ -33,6 +34,7 @@ export class StatisticsComponent {
   groupFilters = new FormGroup({
     filterBy: new FormControl<'categories' | 'tags' | 'time' | 'all'>('all'),
   });
+  readonly viewRange = signal<'week' | 'month' | 'year'>('month');
   filtersFF = [
     { type: InputType.RADIO, value: 'categories', label: 'FILTER.categories' },
     { type: InputType.RADIO, value: 'tags', label: 'FILTER.tags' },
@@ -65,6 +67,15 @@ export class StatisticsComponent {
         null,
       );
       const lastDay = lastEntry ? parseLocalDate(lastEntry.date) : null;
+      const dayKeys = new Set(entries.map((e) => e.date));
+      let series = 0;
+      if (lastDay) {
+        let cursor = lastDay;
+        while (dayKeys.has(format(cursor, 'yyyy-MM-dd'))) {
+          series++;
+          cursor = subDays(cursor, 1);
+        }
+      }
 
       const daysInMonth = new Date(
         m.getFullYear(),
@@ -86,15 +97,25 @@ export class StatisticsComponent {
         id: t.id,
         name: t.name,
         emoji: t.emoji,
-        series: 0,
+        series,
         lastDay,
         completion: daysInMonth ? daysDone.size / daysInMonth : 0,
       };
     });
   });
 
+  readonly habitsToShow = computed(() =>
+    this.habits().filter((h) => h.completion > 0),
+  );
+
   onPeriodChange(e: { date: Date; range: 'week' | 'month' | 'year' }) {
-    this.month.set(e.date);
+    this.viewRange.set(e.range);
+    if (e.range === 'year') {
+      const cur = this.month();
+      this.month.set(new Date(e.date.getFullYear(), cur.getMonth(), 1));
+    } else {
+      this.month.set(startOfMonth(e.date));
+    }
   }
 
   get currentFilterBy() {

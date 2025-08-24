@@ -1,0 +1,136 @@
+{
+  "USER": {
+    "login": "Login:",
+    "password": "Password",
+    "username": "Username",
+    "name": "Name",
+    "surname": "Surname",
+    "nickname": "Nickname",
+    "birthdate": "Birthday:",
+    "count_track": "Count of trackers:"
+  },
+  "MENU": {
+    "overview": "Overview",
+    "tracking_settings": "Tracking settings",
+    "statistics": "Statistics",
+    "profile": "Profile"
+  },
+  "BUTTON": {
+    "save": "Save",
+    "create_new_stat": "Create a new stat",
+    "save_new_stat": "Save the new stat",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "PERIODICITY": {
+    "all_day": "All day",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "night": "Night",
+    "custom_time": "Custom time",
+    "every_day": "Every day",
+    "every_n_days": "Every N days",
+    "on_certain_days": "On certain days of the week",
+    "manual_request": "Only at the user's request (manually)",
+    "once_day": "Once a day",
+    "several_times_day": "Several times a day",
+    "free_entry": "Free entry",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "today": "Today"
+  },
+  "FILTER": {
+    "title": "Filters by",
+    "categories": "Categories",
+    "type_of_tracker": "The type of tracker",
+    "time_of_day": "Time of day",
+    "tags": "Tags",
+    "all": "All"
+  },
+  "INPUT_TYPE": {
+    "number": "Number",
+    "slider": "Slider",
+    "text": "Text",
+    "checkbox": "Checkbox",
+    "select_with_dropdown": "Select with dropdown",
+    "multiple_choice": "Multiple choice",
+    "timer": "Timer",
+    "duration": "Duration",
+    "emoji_scale": "Emoji scale"
+  },
+  "INFO_TEXT": {
+    "number": "Numeric input - e.g. number of steps, glasses of water, kg...",
+    "slider": "Scale from X to Y - e.g. mood level, pain intensity...",
+    "text": "Short text input - e.g. what you ate, how you feel...",
+    "checkbox": "Done/Not done - e.g. took vitamins or not...",
+    "select_with_dropdown": "Choose one from a list - e.g. type of workout or symptom...",
+    "multiple_choice": "Choose several options from a list - e.g. meals eaten, symptoms today...",
+    "timer_duration": "Duration of an activity - e.g. sleep, screen time, work...",
+    "emoji_scale": "Visual scale from \uD83D\uDE01 to \uD83D\uDE21",
+    "no_relevant_info": "There is no relevant information"
+  },
+  "TITLE": {
+    "filters_by": "Filters by",
+    "show_in_graph": "Show in graph",
+    "calendar_heatmap": "Calendar heatmap",
+    "habit_cards": "Habit cards",
+    "create_new_stat": "Create a new stat",
+    "selected": "Selected",
+    "available": "Available",
+    "top_days": "Top days",
+    "top_trackers": "Top trackers",
+    "number_options": "Number of options",
+    "enter_type_metric": "Enter the type of metric"
+  },
+  "STATUS": {
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error",
+    "no_data": "No data",
+    "not_found": "Not found",
+    "updated": "Updated successfully",
+    "deleted": "Deleted successfully"
+  },
+  "CONFIRM": {
+    "delete": "Are you sure you want to delete this?",
+    "cancel": "Are you sure you want to cancel?",
+    "unsaved_changes": "You have unsaved changes. Continue?"
+  },
+  "FORM": {
+    "required": "This field is required",
+    "invalid_email": "Invalid email address",
+    "min_length": "Minimum length is {min} characters",
+    "max_length": "Maximum length is {max} characters",
+    "password_mismatch": "Passwords do not match"
+  },
+  "LANGUAGE": {
+    "eng": "English",
+    "cz": "Czech",
+    "select_language": "Select language"
+  },
+  "CREATE_NEW_STAT": {
+    "name": "Name",
+    "input_type": "Input type",
+    "frequency": "Frequency",
+    "time_of_day": "Time of day",
+    "daily_entries": "Daily entries",
+    "color": "Color",
+    "icon": "Icon",
+    "category": "Category",
+    "tags": "Tags",
+    "tracked": "Tracked"
+  },
+  "CARD": {
+    "series": "Series",
+    "last_day": "The last day",
+    "completion": "Percentage of completion"
+  },
+  "NOTIFICATION": {
+    "save": "Your data has been saved successfully!",
+    "edit": "Changes have been saved!",
+    "need_required": "Please complete the form to proceed."
+  }
+}

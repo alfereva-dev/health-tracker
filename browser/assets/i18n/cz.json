@@ -1,0 +1,102 @@
+{
+  "USER": {
+    "login": "Přihlášení",
+    "password": "Heslo",
+    "username": "Uživatelské jméno",
+    "name": "Jméno",
+    "surname": "Příjmení",
+    "nickname": "Přezdívka"
+  },
+  "MENU": {
+    "overview": "Přehled",
+    "tracking_settings": "Nastavení sledování",
+    "statistics": "Statistiky",
+    "profile": "Profil"
+  },
+  "BUTTON": {
+    "save": "Uložit",
+    "create_new_stat": "Vytvořit novou statistiku",
+    "save_new_stat": "Uložit novou statistiku",
+    "edit": "Upravit",
+    "cancel": "Zrušit",
+    "delete": "Smazat"
+  },
+  "PERIODICITY": {
+    "all_day": "Celý den",
+    "morning": "Ráno",
+    "afternoon": "Odpoledne",
+    "evening": "Večer",
+    "custom_time": "Vlastní čas",
+    "every_day": "Každý den",
+    "every_n_days": "Každých N dní",
+    "on_certain_days": "V určité dny v týdnu",
+    "manual_request": "Pouze na žádost uživatele (ručně)",
+    "once_day": "Jednou denně",
+    "several_times_day": "Několikrát denně",
+    "free_entry": "Volný vstup",
+    "week": "Týden",
+    "month": "Měsíc",
+    "year": "Rok"
+  },
+  "FILTER": {
+    "title": "Filtrovat podle",
+    "categories": "Kategorie",
+    "type_of_tracker": "Typ trackeru",
+    "time_of_day": "Část dne",
+    "tags": "Štítky"
+  },
+  "INPUT_TYPE": {
+    "number": "Číslo",
+    "slider": "Posuvník",
+    "text": "Text",
+    "checkbox": "Zaškrtávací políčko",
+    "select_with_dropdown": "Výběr z rozbalovací nabídky",
+    "multiple_choice": "Více možností",
+    "timer": "Časovač",
+    "duration": "Doba trvání",
+    "emoji_scale": "Měřítko emoji"
+  },
+  "INFO_TEXT": {
+    "number": "Číselný vstup – např. počet kroků, sklenic vody, kg...",
+    "slider": "Stupnice od X do Y – např. úroveň nálady, intenzita bolesti...",
+    "text": "Krátký textový vstup – např. co jste jedli, jak se cítíte...",
+    "checkbox": "Hotovo/Nehotovo – např. vzal(a) vitamíny nebo ne...",
+    "select_with_dropdown": "Vyberte jednu možnost ze seznamu – např. typ tréninku nebo symptom...",
+    "multiple_choice": "Vyberte několik možností ze seznamu – např. snědená jídla, dnešní symptomy...",
+    "timer_duration": "Doba trvání aktivity – např. spánek, čas u obrazovky, práce...",
+    "emoji_scale": "Vizuální stupnice od \uD83D\uDE01 do \uD83D\uDE21"
+  },
+  "TITLE": {
+    "filters_by": "Filtrovat podle",
+    "show_in_graph": "Zobrazit v grafu",
+    "calendar_heatmap": "Kalendář – teplotní mapa",
+    "habit_cards": "Karty návyků",
+    "create_new_stat": "Vytvořit novou statistiku"
+  },
+  "STATUS": {
+    "loading": "Načítání...",
+    "success": "Úspěch",
+    "error": "Chyba",
+    "no_data": "Žádná data",
+    "not_found": "Nenalezeno",
+    "updated": "Úspěšně aktualizováno",
+    "deleted": "Úspěšně smazáno"
+  },
+  "CONFIRM": {
+    "delete": "Opravdu chcete toto smazat?",
+    "cancel": "Opravdu chcete zrušit?",
+    "unsaved_changes": "Máte neuložené změny. Pokračovat?"
+  },
+  "FORM": {
+    "required": "Toto pole je povinné",
+    "invalid_email": "Neplatná e-mailová adresa",
+    "min_length": "Minimální délka je {min} znaků",
+    "max_length": "Maximální délka je {max} znaků",
+    "password_mismatch": "Hesla se neshodují"
+  },
+  "LANGUAGE": {
+    "eng": "Angličtina",
+    "cz": "Čeština",
+    "select_language": "Vyberte jazyk"
+  }
+}

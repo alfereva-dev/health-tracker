@@ -1,5 +1,9 @@
 <div class="page-box">
-  <app-stats-tracker class="primary-box"></app-stats-tracker>
+  <app-stats-tracker
+    class="primary-box"
+    [editable]="false"
+    [date]="selectedDate()"
+  ></app-stats-tracker>
   <div class="primary-box">
     <full-calendar [options]="calendarOptions"></full-calendar>
   </div>

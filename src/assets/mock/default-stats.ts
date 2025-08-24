@@ -1,12 +1,12 @@
 import { InputType } from '../../app/core/enums/input-type';
 import { Frequency } from '../../app/core/enums/frequency';
-import { Stat } from '../../app/core/models/stat';
+import { Tracker } from '../../app/core/models/tracker';
 import { TimeOfDay } from '../../app/core/enums/time-of-day';
 import { DailyEntries } from '../../app/core/enums/daily-entries';
 import { Emoji } from '../../app/core/enums/emoji';
 import { Colors } from '../../app/core/enums/colors';
 
-export const StatsDefault: Stat[] = [
+export const StatsDefault: Tracker[] = [
   {
     id: 1,
     name: 'Mood',
@@ -18,7 +18,7 @@ export const StatsDefault: Stat[] = [
     emoji: Emoji.BOAT,
     category: [],
     tags: [],
-    privacy: false,
+    tracked: true,
     entries: [],
   },
   {
@@ -32,7 +32,7 @@ export const StatsDefault: Stat[] = [
     emoji: Emoji.BASKETBALL,
     category: [],
     tags: [],
-    privacy: false,
+    tracked: true,
     entries: [],
   },
 ];

@@ -7,10 +7,11 @@ import { Tag } from './tag';
 import { Colors } from '../enums/colors';
 import { Emoji } from '../enums/emoji';
 
-export interface Stat {
+export interface Tracker {
   id: number;
   name: string;
   inputType: InputType;
+  options?: OptionsInputType[];
   frequency: Frequency;
   timeOfDay: TimeOfDay;
   dailyEntries: DailyEntries;
@@ -18,11 +19,16 @@ export interface Stat {
   emoji: Emoji;
   category: Category[];
   tags: Tag[];
-  privacy: boolean;
+  tracked: boolean;
   entries: StatEntry[];
 }
 
 export interface StatEntry<V = number | string | boolean | string[]> {
   date: string;
+  value: V;
+}
+
+export interface OptionsInputType<V = string> {
+  id: number;
   value: V;
 }

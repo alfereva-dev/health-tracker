@@ -1,13 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormField } from '../../../core/models/form-field';
 import { InputType } from '../../../core/enums/input-type';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgClass, NgStyle } from '@angular/common';
 import { NgOptionComponent, NgSelectComponent } from '@ng-select/ng-select';
+import { startWith, Subscription } from 'rxjs';
 
+export type EmojiScore = 1 | 2 | 3 | 4 | 5;
 type EmojiOption = {
-  value: 1 | 2 | 3 | 4 | 5;
+  value: EmojiScore;
   alt: string;
   src: string;
 };
@@ -21,6 +29,7 @@ type EmojiOption = {
     NgSelectComponent,
     NgOptionComponent,
     FormsModule,
+    NgStyle,
   ],
   templateUrl: './form-field.component.html',
   styleUrl: './form-field.component.css',
@@ -29,7 +38,9 @@ export class FormFieldComponent {
   @Input() field!: FormField;
   @Input() disableLabel: boolean = false;
   @Input() selected: 1 | 2 | 3 | 4 | 5 | null = null;
-  @Output() selectedChange = new EventEmitter<1 | 2 | 3 | 4 | 5>();
+  @Output() selectedChange = new EventEmitter<EmojiScore>();
+  @Output() optionsChange = new EventEmitter<string[]>();
+  private sub?: Subscription;
   protected readonly InputType = InputType;
   readonly emojis: EmojiOption[] = [
     { value: 1, alt: 'angry', src: 'assets/icons/emoji/emoji_angry.svg' },
@@ -39,20 +50,40 @@ export class FormFieldComponent {
     { value: 5, alt: 'cheerful', src: 'assets/icons/emoji/emoji_cheerful.svg' },
   ];
   sliderBackground = '';
+  inputCount = 0;
+  optionInputs: string[] = [];
 
   ngOnInit() {
-    const v = this.getCurrentSliderValue();
-    this.updateSliderColor(v);
-
-    this.field.formControl?.valueChanges.subscribe((val) =>
-      this.updateSliderColor(Number(val ?? 0)),
-    );
+    this.subscribeToFormControl();
   }
 
-  getCurrentSliderValue(): number {
-    const raw = this.field?.formControl?.value ?? this.field?.value ?? 0;
-    const n = Number(raw);
-    return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) : 0;
+  ngOnChanges(ch: SimpleChanges) {
+    if (ch['field']) {
+      this.subscribeToFormControl();
+    }
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
+  private subscribeToFormControl() {
+    this.sub?.unsubscribe();
+    const c = this.field?.formControl;
+    if (!c) return;
+
+    if (this.field.type === InputType.SLIDER) {
+      this.updateSliderColor(Number(c.value ?? 0));
+      this.sub = c.valueChanges
+        .pipe(startWith(c.value))
+        .subscribe((v) => this.updateSliderColor(Number(v ?? 0)));
+    } else {
+      this.sub = c.valueChanges.subscribe();
+    }
+  }
+
+  private clamp(x: number) {
+    return Math.min(100, Math.max(0, x));
   }
 
   onSliderInput(e: Event) {
@@ -62,20 +93,58 @@ export class FormFieldComponent {
   }
 
   updateSliderColor(val: number) {
-    const pct = Math.min(100, Math.max(0, val));
+    const pct = this.clamp(Number(val || 0));
     const t = pct / 100;
     const r = Math.round(255 * (1 - t));
     const g = Math.round(255 * t);
-    const b = 0;
-    const color = `rgb(${r},${g},${b})`;
-
+    const color = `rgb(${r},${g},0)`;
     this.sliderBackground =
       `linear-gradient(90deg, ${color} 0%, ${color} ${pct}%, ` +
       `#3a3f4a ${pct}%, #3a3f4a 100%)`;
   }
 
-  pick(v: 1 | 2 | 3 | 4 | 5) {
-    this.selected = v;
-    this.selectedChange.emit(v);
+  isChoiceType(v: unknown): boolean {
+    return (
+      v === this.InputType.SELECT_DROPDOWN ||
+      v === this.InputType.MULTIPLE_CHOICE
+    );
+  }
+
+  onCountChange(n: number) {
+    const num = Number.isFinite(n) ? Math.trunc(n) : 0;
+    const clamped = Math.max(0, Math.min(50, num));
+
+    this.inputCount = clamped;
+
+    const prev = this.optionInputs ?? [];
+    this.optionInputs = Array.from(
+      { length: clamped },
+      (_, i) => prev[i] ?? '',
+    );
+    this.emitOptions();
+  }
+
+  onOptionInput(i: number, val: string) {
+    this.optionInputs[i] = val;
+    this.emitOptions();
+  }
+
+  private emitOptions() {
+    this.optionsChange.emit(this.optionInputs);
+  }
+
+  private readonly _localMetric = new FormControl<string | null>('');
+
+  get metricCtrl(): FormControl<string | null> {
+    return this.field.metricControl ?? this._localMetric;
+  }
+
+  get emojiValue(): 1 | 2 | 3 | 4 | 5 | null {
+    const v = Number(this.field.formControl?.value);
+    return v >= 1 && v <= 5 ? (v as 1 | 2 | 3 | 4 | 5) : null;
+  }
+
+  pickEmoji(v: 1 | 2 | 3 | 4 | 5) {
+    this.field.formControl?.setValue(v, { emitEvent: true });
   }
 }

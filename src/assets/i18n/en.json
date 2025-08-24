@@ -81,7 +81,9 @@
     "selected": "Selected",
     "available": "Available",
     "top_days": "Top days",
-    "top_trackers": "Top trackers"
+    "top_trackers": "Top trackers",
+    "number_options": "Number of options",
+    "enter_type_metric": "Enter the type of metric"
   },
   "STATUS": {
     "loading": "Loading...",
@@ -119,7 +121,7 @@
     "icon": "Icon",
     "category": "Category",
     "tags": "Tags",
-    "privacy": "Privacy"
+    "tracked": "Tracked"
   },
   "CARD": {
     "series": "Series",

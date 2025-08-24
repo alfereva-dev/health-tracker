@@ -11,7 +11,7 @@ import {
   throwError,
 } from 'rxjs';
 import { User } from '../models/user';
-import { Stat } from '../models/stat';
+import { Tracker } from '../models/tracker';
 import { MockUsers } from '../../../assets/mock/user';
 import { Entry } from '../models/tracker.model';
 
@@ -61,17 +61,17 @@ export class UserService {
     return of(update).pipe(delay(this.LATENCY_MS));
   }
 
-  getHealthTrackers$(): Observable<Stat[]> {
+  getHealthTrackers$(): Observable<Tracker[]> {
     return this.user$.pipe(map((u) => u.healthTracker ?? []));
   }
 
-  getHealthTrackerById$(trackerId: number): Observable<Stat | undefined> {
+  getHealthTrackerById$(trackerId: number): Observable<Tracker | undefined> {
     return this.getHealthTrackers$().pipe(
       map((list) => list.find((t) => t.id === trackerId)),
     );
   }
 
-  addHealthTracker(newTracker: Stat): Observable<Stat> {
+  addHealthTracker(newTracker: Tracker): Observable<Tracker> {
     const u = this.requireUser();
     const next: User = {
       ...u,
@@ -84,8 +84,8 @@ export class UserService {
 
   updateHealthTracker(
     trackerId: number,
-    patch: Partial<Stat>,
-  ): Observable<Stat> {
+    patch: Partial<Tracker>,
+  ): Observable<Tracker> {
     const u = this.requireUser();
     const list = u.healthTracker.map((t) =>
       t.id === trackerId ? { ...t, ...patch } : t,
@@ -107,41 +107,34 @@ export class UserService {
     return of(void 0).pipe(delay(this.LATENCY_MS));
   }
 
-  addEntry(trackerId: number, entry: Entry): Observable<Stat> {
+  upsertEntry(trackerId: number, entry: Entry): Observable<Tracker> {
     const u = this.requireUser();
-    const list = u.healthTracker.map((t) =>
-      t.id === trackerId
-        ? { ...t, entries: [...((t as any).entries ?? []), entry] }
-        : t,
-    );
-    const updated = list.find((t) => t.id === trackerId)!;
-    const next: User = { ...u, healthTracker: list };
-    this.persist(next);
-    this.store.next(next);
-    return of(updated).pipe(delay(this.LATENCY_MS));
-  }
 
-  updateEntry(
-    trackerId: number,
-    date: string,
-    patch: Partial<Entry>,
-  ): Observable<Stat> {
-    const u = this.requireUser();
     const list = u.healthTracker.map((t) => {
       if (t.id !== trackerId) return t;
-      const entries: Entry[] = ((t as any).entries ?? []).map((e: Entry) =>
-        e.date === date ? { ...e, ...patch } : e,
-      );
+
+      const current: Entry[] = ((t as any).entries ?? []) as Entry[];
+      const idx = current.findIndex((e) => e.date === entry.date);
+
+      const entries =
+        idx >= 0
+          ? current.map((e, i) => (i === idx ? { ...e, ...entry } : e)) // обновление
+          : [...current, entry]; // добавление
+
       return { ...t, entries };
     });
-    const updated = list.find((t) => t.id === trackerId)!;
+
+    const updated = list.find((t) => t.id === trackerId);
+    if (!updated) return throwError(() => new Error('Tracker not found'));
+
     const next: User = { ...u, healthTracker: list };
     this.persist(next);
     this.store.next(next);
+
     return of(updated).pipe(delay(this.LATENCY_MS));
   }
 
-  removeEntry(trackerId: number, date: string): Observable<Stat> {
+  removeEntry(trackerId: number, date: string): Observable<Tracker> {
     const u = this.requireUser();
     const list = u.healthTracker.map((t) => {
       if (t.id !== trackerId) return t;

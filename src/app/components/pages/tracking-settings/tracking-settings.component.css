@@ -18,4 +18,5 @@
   flex-wrap: wrap;
   gap: 10px;
   min-height: 25vh;
+  margin-top: 10px;
 }

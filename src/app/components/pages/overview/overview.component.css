@@ -12,6 +12,10 @@ full-calendar {
   color: var(--secondary-color);
 }
 
+.fc-day {
+  cursor: pointer;
+}
+
 .fc .fc-button-primary {
   background: transparent;
   border: 2px solid var(--primary-color);

@@ -15,10 +15,9 @@
 .btn {
   height: 3vh;
   min-width: 3vh;
-  border: none;
+  margin-left: auto;
 }
 
 .edit-box {
-  position: absolute;
   justify-self: right;
 }

@@ -5,26 +5,34 @@ import { Frequency } from '../../../core/enums/frequency';
 import { TimeOfDay } from '../../../core/enums/time-of-day';
 import { DailyEntries } from '../../../core/enums/daily-entries';
 import { FormFieldComponent } from '../../ui/form-field/form-field.component';
+import { UserService } from '../../../core/services/user.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { Colors } from '../../../core/enums/colors';
+import { Emoji } from '../../../core/enums/emoji';
+import { Tracker } from '../../../core/models/tracker';
+
+type Option<T> = { label: string; value: T };
 
 @Component({
   selector: 'app-create-new-stat',
-  imports: [FormFieldComponent],
-  templateUrl: './create-new-stat.component.html',
-  styleUrl: './create-new-stat.component.css',
+  imports: [FormFieldComponent, TranslateModule],
+  templateUrl: './create-new-tracker.component.html',
+  styleUrl: './create-new-tracker.component.css',
 })
-export class CreateNewStatComponent {
+export class CreateNewTrackerComponent {
   @Output() close = new EventEmitter<void>();
+  metricControl = new FormControl<string | null>('');
   formGroup = new FormGroup({
     name: new FormControl<string>(''),
     inputType: new FormControl(''),
     frequency: new FormControl(''),
     timeOfDay: new FormControl(''),
     dailyEntries: new FormControl(''),
-    color: new FormControl(''),
-    icon: new FormControl(''),
+    color: new FormControl<Colors | null>(null),
+    icon: new FormControl<Emoji | null>(null),
     category: new FormControl(''),
     tags: new FormControl(''),
-    privacy: new FormControl<boolean>(false),
+    tracked: new FormControl<boolean>(false),
   });
 
   optionsInputType = [
@@ -86,55 +94,130 @@ export class CreateNewStatComponent {
     { label: 'PERIODICITY.free_entry', value: DailyEntries.FREE_ENTRY },
   ];
 
+  colorOptions = this.enumToKeyedOptions(Colors, (_key, val) => val);
+  emojiOptions = this.enumToKeyedOptions(Emoji, (_key, val) => val);
+
   formField = [
     {
       label: 'CREATE_NEW_STAT.name',
       formControl: this.formGroup.controls.name,
       type: InputType.SMALL_STRING,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.input_type',
       formControl: this.formGroup.controls.inputType,
       type: InputType.SELECT_DROPDOWN,
       options: this.optionsInputType,
+      addOptions: true,
+      metricControl: this.metricControl,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.frequency',
       formControl: this.formGroup.controls.frequency,
       type: InputType.SELECT_DROPDOWN,
       options: this.optionsFrequency,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.time_of_day',
       formControl: this.formGroup.controls.timeOfDay,
       type: InputType.SELECT_DROPDOWN,
       options: this.optionsTimeOfDay,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.daily_entries',
       formControl: this.formGroup.controls.dailyEntries,
       type: InputType.SELECT_DROPDOWN,
       options: this.optionsDailyEntries,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.color',
       formControl: this.formGroup.controls.color,
       type: InputType.SELECT_DROPDOWN,
-      options: [],
+      options: this.colorOptions,
+      colorizeOptions: true,
+      isRequired: true,
     },
     {
       label: 'CREATE_NEW_STAT.icon',
       formControl: this.formGroup.controls.icon,
       type: InputType.SELECT_DROPDOWN,
-      options: [],
+      options: this.emojiOptions,
+      isRequired: true,
     },
     {
-      label: 'CREATE_NEW_STAT.privacy',
-      formControl: this.formGroup.controls.privacy,
+      label: 'CREATE_NEW_STAT.tracked',
+      formControl: this.formGroup.controls.tracked,
       type: InputType.CHECKBOX,
       infoText: 'Hide from main page',
     },
   ];
+  saving = false;
+
+  constructor(private readonly userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.user$.subscribe({
+      next: (detail) => {},
+    });
+    console.log(this.colorOptions, this.emojiOptions);
+  }
+
+  enumToKeyedOptions<T extends Record<string, string>>(
+    en: T,
+    getLabel?: (
+      key: Extract<keyof T, string>,
+      value: T[Extract<keyof T, string>],
+    ) => string,
+  ): Option<Extract<keyof T, string>>[] {
+    const keys = Object.keys(en) as Array<Extract<keyof T, string>>;
+    return keys.map((key) => ({
+      label: getLabel ? getLabel(key, en[key]) : key,
+      value: key,
+    }));
+  }
+
+  addNewStat() {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.invalid) return;
+
+    const raw = this.formGroup.getRawValue();
+    const inputType = Number(raw.inputType) as InputType;
+    const metric =
+      inputType === InputType.NUMBER
+        ? this.metricControl.value?.trim() || null
+        : null;
+
+    const newTracker: Tracker = {
+      name: (raw.name || '').trim(),
+      inputType: raw.inputType!,
+      frequency: raw.frequency!,
+      timeOfDay: raw.timeOfDay!,
+      dailyEntries: raw.dailyEntries!,
+      color: raw.color as Colors,
+      icon: raw.icon as Emoji,
+      category: (raw.category || '').trim() || null,
+      tags: (raw.tags || '').trim() || null,
+      tracked: !!raw.tracked,
+      metric,
+    } as unknown as Tracker;
+
+    this.saving = true;
+    this.userService.addHealthTracker(newTracker).subscribe({
+      next: () => {
+        this.saving = false;
+        this.onCloseClick();
+      },
+      error: (err) => {
+        this.saving = false;
+        console.error('addHealthTracker failed', err);
+      },
+    });
+  }
 
   onOverlayClick() {
     this.close.emit();

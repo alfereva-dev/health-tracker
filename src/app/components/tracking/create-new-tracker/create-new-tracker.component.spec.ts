@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateNewStatComponent } from './create-new-stat.component';
+import { CreateNewTrackerComponent } from './create-new-tracker.component';
 
 describe('CreateNewStatComponent', () => {
-  let component: CreateNewStatComponent;
-  let fixture: ComponentFixture<CreateNewStatComponent>;
+  let component: CreateNewTrackerComponent;
+  let fixture: ComponentFixture<CreateNewTrackerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateNewStatComponent]
-    })
-    .compileComponents();
+      imports: [CreateNewTrackerComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateNewStatComponent);
+    fixture = TestBed.createComponent(CreateNewTrackerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

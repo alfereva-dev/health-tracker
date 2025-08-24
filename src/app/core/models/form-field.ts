@@ -7,11 +7,15 @@ export class FormField {
   type?: InputType;
   value?: string | number;
   formControl?: FormControl;
+  isRequired?: boolean = false;
   options?: SelectFieldOption[];
   infoText?: string;
-  metrics?: boolean;
-  metricsLabel?: string;
   class?: string;
+  colorizeOptions?: boolean;
+  addOptions?: boolean;
+  addMetrics?: boolean;
+  metricsLabel?: string;
+  metricControl?: FormControl<string | null>;
 }
 
 export class SelectFieldOption {

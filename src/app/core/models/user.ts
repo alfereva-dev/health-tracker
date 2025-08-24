@@ -1,4 +1,4 @@
-import { Stat } from './stat';
+import { Tracker } from './tracker';
 import { Category } from './category';
 import { Tag } from './tag';
 
@@ -12,5 +12,5 @@ export interface User {
   avatarUrl?: string;
   category: Category[];
   tags: Tag[];
-  healthTracker: Stat[];
+  healthTracker: Tracker[];
 }

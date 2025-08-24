@@ -1,21 +1,16 @@
-<div
-  cdkDropList
-  (cdkDropListDropped)="drop($event)"
-  [cdkDropListDisabled]="!editable"
->
-  @if (editable) {
-    <div class="edit-box">
-      <button class="btn">
-        <img src="assets/icons/action/edit-icon.svg" alt="edit" class="icon" />
-      </button>
+<div class="secondary-title">Health Tracker</div>
+@if (!editable) {
+  <div class="secondary-title">{{ formattedDate }}</div>
+}
+<div class="stats-box">
+  @for (stat of fieldVM(); track stat.id) {
+    <div class="stat-item" cdkDrag>
+      <app-form-field [field]="stat"></app-form-field>
     </div>
   }
-  <div class="secondary-title">Health Tracker</div>
-  <div class="stats-box">
-    @for (stat of baseFormFields; track stat) {
-      <div class="stat-item" cdkDrag>
-        <app-form-field [field]="stat"></app-form-field>
-      </div>
-    }
-  </div>
 </div>
+@if (!editable) {
+  <button class="btn action-btn" (click)="saveAll()">
+    {{ "BUTTON.save" | translate }}
+  </button>
+}

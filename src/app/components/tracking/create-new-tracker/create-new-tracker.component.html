@@ -3,12 +3,15 @@
     <button class="modal-close" (click)="onCloseClick()" aria-label="Close">
       ×
     </button>
-    <div class="secondary-title">Create a new stat</div>
+    <div class="secondary-title">{{ "TITLE.create_new_stat" | translate }}</div>
 
     <div>
       @for (ff of formField; track ff) {
         <app-form-field [field]="ff"></app-form-field>
       }
     </div>
+    <button class="btn action-btn" (click)="addNewStat()">
+      {{ "BUTTON.save_new_stat" | translate }}
+    </button>
   </div>
 </div>

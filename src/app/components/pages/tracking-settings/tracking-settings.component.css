@@ -1,0 +1,22 @@
+.primary-box {
+  display: flex;
+  align-items: stretch;
+  min-height: 68vh;
+}
+
+.stat-btn {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.stat-btn:hover {
+  border-color: var(--select-color);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 25vh;
+  margin-top: 10px;
+}

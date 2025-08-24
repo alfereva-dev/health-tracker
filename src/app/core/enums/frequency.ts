@@ -1,0 +1,6 @@
+export enum Frequency {
+  EVERY_DAY = 'EVERY_DAY',
+  EVERY_N_DAYS = 'EVERY_N_DAYS',
+  MANUALLY = 'MANUALLY',
+  CERTAIN_DAYS_OF_WEEK = 'CERTAIN_DAYS_OF_WEEK',
+}

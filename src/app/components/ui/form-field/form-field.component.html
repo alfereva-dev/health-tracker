@@ -1,0 +1,207 @@
+@if (field) {
+  <div class="ff_box">
+    @if (!disableLabel) {
+      <span
+        class="ff_label"
+        [ngClass]="{
+          required: field.isRequired,
+        }"
+        >{{ field.label ?? "" | translate }}</span
+      >
+    }
+    <span
+      class="ff_input"
+      [ngClass]="{
+        ff_input_additional: field?.addOptions,
+      }"
+    >
+      @switch (field.type) {
+        @case (InputType.NUMBER) {
+          <input
+            [id]="field.id"
+            type="number"
+            class="ff_number"
+            [formControl]="field.formControl!"
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [min]="0"
+          />
+          @if (field.addMetrics) {
+            <span class="ff_info_label">{{
+              field.metricsLabel ?? "" | translate
+            }}</span>
+          }
+        }
+        @case (InputType.SMALL_STRING) {
+          <input
+            [id]="field.id"
+            type="text"
+            class="ff_number"
+            [formControl]="field.formControl!"
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [maxLength]="100"
+          />
+        }
+        @case (InputType.SLIDER) {
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            class="ff_slider"
+            (input)="onSliderInput($event)"
+            [style.background]="sliderBackground"
+            [formControl]="field.formControl!"
+          />
+        }
+        @case (InputType.TEXT) {
+          <textarea
+            [id]="field.id"
+            class="ff_textarea"
+            [maxLength]="500"
+            [class]="field.class ?? ''"
+            [formControl]="field.formControl!"
+          ></textarea>
+        }
+        @case (InputType.CHECKBOX) {
+          <input
+            [id]="field.id"
+            type="checkbox"
+            class="ff_checkbox"
+            [class]="field.class ?? ''"
+            [formControl]="field.formControl!"
+          />
+          <span class="ff_info_label">{{
+            field.infoText ?? "" | translate
+          }}</span>
+        }
+        @case (InputType.SELECT_DROPDOWN) {
+          <ng-select
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [formControl]="field.formControl!"
+            [class]="field.class ?? ''"
+            [clearable]="false"
+            class="ff_dropdown"
+            bindLabel="name"
+          >
+            @for (option of field.options; track option.value) {
+              <ng-option [value]="option.value">
+                <div
+                  [ngClass]="field?.colorizeOptions ? 'color-box' : null"
+                  [ngStyle]="
+                    field?.colorizeOptions
+                      ? { 'background-color': option.label }
+                      : null
+                  "
+                >
+                  {{ option.label ?? "" | translate }}
+                </div>
+              </ng-option>
+            }
+          </ng-select>
+          @if (field?.addOptions && isChoiceType(field.formControl?.value)) {
+            <div class="option-builder">
+              <div
+                class="ff_label"
+                [ngClass]="{
+                  required: field.isRequired,
+                }"
+              >
+                {{ "TITLE.number_options" | translate }}:
+                <input
+                  type="number"
+                  min="1"
+                  max="50"
+                  class="option_input"
+                  [value]="inputCount"
+                  (input)="onCountChange($any($event.target).valueAsNumber)"
+                />
+              </div>
+              <div class="options-grid">
+                @for (val of optionInputs; let idx = $index; track idx) {
+                  <input
+                    class="option_input"
+                    type="text"
+                    [value]="optionInputs[idx]"
+                    (input)="onOptionInput(idx, $any($event.target).value)"
+                  />
+                }
+              </div>
+            </div>
+          }
+
+          @if (
+            field?.addOptions && field.formControl?.value === InputType.NUMBER
+          ) {
+            <div class="ff_label">
+              {{ "TITLE.enter_type_metric" | translate }}:
+              <input
+                type="text"
+                class="option_input"
+                [formControl]="metricCtrl"
+              />
+            </div>
+          }
+        }
+        @case (InputType.MULTIPLE_CHOICE) {
+          <ng-select
+            [ngClass]="{
+              invalid: field.formControl?.invalid && field.formControl?.dirty,
+            }"
+            [formControl]="field.formControl!"
+            [class]="field.class ?? ''"
+            [clearable]="false"
+            [multiple]="true"
+            class="ff_dropdown"
+          >
+            @for (option of field.options; track option.value) {
+              <ng-option [value]="option.value">
+                {{ option.label ?? "" | translate }}
+              </ng-option>
+            }
+          </ng-select>
+        }
+        @case (InputType.TIMER) {}
+        @case (InputType.EMOJI_SCALE) {
+          <div
+            class="emoji_scale"
+            role="radiogroup"
+            [attr.aria-label]="field.label"
+          >
+            @for (e of emojis; track e.value) {
+              <button
+                type="button"
+                class="emoji_button"
+                [class.is-selected]="emojiValue === e.value"
+                (click)="pickEmoji(e.value)"
+                [attr.aria-checked]="emojiValue === e.value"
+                [title]="e.alt"
+              >
+                <img class="emoji_icon" [src]="e.src" [alt]="e.alt" />
+              </button>
+            }
+          </div>
+        }
+        @case (InputType.RADIO) {
+          <div class="radio-box">
+            <input
+              type="radio"
+              [formControl]="field.formControl!"
+              [value]="field.value"
+              class="radio-button"
+            />
+            <div class="ff_label">{{ field.infoText | translate }}</div>
+          </div>
+        }
+        @case (InputType.INFO_TEXT) {
+          <div class="ff_label">{{ field.value }}</div>
+        }
+      }
+    </span>
+  </div>
+}

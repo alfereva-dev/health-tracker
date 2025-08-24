@@ -1,0 +1,46 @@
+<div class="page-box primary-box">
+  <div class="left-panel">
+    <div class="user-photo">
+      <img
+        class="image"
+        [src]="
+          avatar.avatarUrl() || user.avatarUrl || 'assets/icons/user-white.svg'
+        "
+        alt="user"
+      />
+    </div>
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      (change)="onAvatarChange($event)"
+      class="d-none"
+    />
+    <div class="action-btn-box">
+      <button class="action-btn" (click)="fileInput.click()">
+        <img class="icon" src="assets/icons/action/edit-icon.svg" alt="edit" />
+      </button>
+      <button class="action-btn" (click)="onRemoveAvatar()">
+        <img
+          class="icon"
+          src="assets/icons/action/delete-icon.svg"
+          alt="delete"
+        />
+      </button>
+    </div>
+    @if (error()) {
+      <div class="error">{{ error() }}</div>
+    }
+  </div>
+
+  <div class="left-panel">
+    <div class="secondary-title">{{ user.name }} {{ user.lastname }}</div>
+    <div class="infobox">
+      @for (ff of formFields; track ff) {
+        <app-form-field [field]="ff"></app-form-field>
+      }
+      <app-infobox [info]="topDaysInfo()"></app-infobox>
+      <app-infobox [info]="topTrackersInfo()"></app-infobox>
+    </div>
+  </div>
+</div>

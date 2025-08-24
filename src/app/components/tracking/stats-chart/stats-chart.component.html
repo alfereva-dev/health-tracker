@@ -1,0 +1,108 @@
+<div class="chart-toolbar" style="height: 65vh">
+  <div class="range-box hidden-scrollbar-y">
+    <div class="range-btn-box hidden-scrollbar-y">
+      <button
+        (click)="range.set('week')"
+        class="chip"
+        [class.is-active]="range() == 'week'"
+      >
+        {{ "PERIODICITY.week" | translate }}
+      </button>
+      <button
+        (click)="range.set('month')"
+        class="chip"
+        [class.is-active]="range() == 'month'"
+      >
+        {{ "PERIODICITY.month" | translate }}
+      </button>
+      <button
+        (click)="range.set('year')"
+        class="chip"
+        [class.is-active]="range() == 'year'"
+      >
+        {{ "PERIODICITY.year" | translate }}
+      </button>
+    </div>
+
+    <div class="range-btn-box hidden-scrollbar-y">
+      <button class="btn-nav" (click)="today()" [disabled]="isToday()">
+        {{ "PERIODICITY.today" | translate }}
+      </button>
+      <div>
+        <button class="btn-nav" (click)="shift(-1)" id="btn-left">‹</button>
+        <button class="btn-nav" (click)="shift(1)" id="btn-right">›</button>
+      </div>
+    </div>
+  </div>
+  <canvas
+    baseChart
+    [data]="{ datasets: datasets() }"
+    [options]="options()"
+    type="line"
+  >
+  </canvas>
+</div>
+
+<div class="buttons-box">
+  <div class="chip-box hidden-scrollbar-y">
+    @if (filterBy !== "all") {
+      @if (filterBy === "time") {
+        @for (td of timeOptions; track td.value) {
+          <button
+            class="chip"
+            (click)="pickTime(td)"
+            [class.is-active]="selectedTime() === td.value"
+          >
+            {{ td.label | translate }}
+          </button>
+        }
+      }
+      @if (filterBy === "tags") {
+        @for (tag of allTags; track tag.id) {
+          <button
+            class="chip"
+            (click)="pickTag(tag.id)"
+            [class.is-active]="selectedTagId() === tag.id"
+          >
+            {{ tag.name }}
+          </button>
+        }
+      }
+      @if (filterBy === "categories") {
+        @for (c of allCategories; track c.id) {
+          <button
+            class="chip"
+            (click)="pickCategory(c.id)"
+            [class.is-active]="selectedCategoryId() === c.id"
+          >
+            {{ c.name }}
+          </button>
+        }
+      }
+    }
+  </div>
+
+  <div class="chip-box hidden-scrollbar-y">
+    @if (filterBy === "all") {
+      @for (t of trackers; track t.id) {
+        <button
+          class="chip"
+          (click)="toggle(t.id)"
+          [class.is-active]="selected().has(t.id)"
+        >
+          {{ t.name }} {{ t.emoji }}
+        </button>
+      }
+    } @else {
+      @for (t of filteredTrackers(); track t.id) {
+        <button
+          class="chip"
+          (click)="toggle(t.id)"
+          [class.is-active]="selected().has(t.id)"
+        >
+          {{ t.name }} {{ t.emoji }}
+        </button>
+      }
+    }
+  </div>
+</div>

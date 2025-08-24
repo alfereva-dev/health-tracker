@@ -1,11 +1,13 @@
 {
   "USER": {
-    "login": "Přihlášení",
+    "login": "Přihlášení:",
     "password": "Heslo",
     "username": "Uživatelské jméno",
     "name": "Jméno",
     "surname": "Příjmení",
-    "nickname": "Přezdívka"
+    "nickname": "Přezdívka",
+    "birthdate": "Datum narození:",
+    "count_track": "Počet trackerů:"
   },
   "MENU": {
     "overview": "Přehled",
@@ -26,6 +28,7 @@
     "morning": "Ráno",
     "afternoon": "Odpoledne",
     "evening": "Večer",
+    "night": "Noc",
     "custom_time": "Vlastní čas",
     "every_day": "Každý den",
     "every_n_days": "Každých N dní",
@@ -36,14 +39,16 @@
     "free_entry": "Volný vstup",
     "week": "Týden",
     "month": "Měsíc",
-    "year": "Rok"
+    "year": "Rok",
+    "today": "Dnes"
   },
   "FILTER": {
     "title": "Filtrovat podle",
     "categories": "Kategorie",
     "type_of_tracker": "Typ trackeru",
     "time_of_day": "Část dne",
-    "tags": "Štítky"
+    "tags": "Štítky",
+    "all": "Vše"
   },
   "INPUT_TYPE": {
     "number": "Číslo",
@@ -64,14 +69,21 @@
     "select_with_dropdown": "Vyberte jednu možnost ze seznamu – např. typ tréninku nebo symptom...",
     "multiple_choice": "Vyberte několik možností ze seznamu – např. snědená jídla, dnešní symptomy...",
     "timer_duration": "Doba trvání aktivity – např. spánek, čas u obrazovky, práce...",
-    "emoji_scale": "Vizuální stupnice od \uD83D\uDE01 do \uD83D\uDE21"
+    "emoji_scale": "Vizuální stupnice od \uD83D\uDE01 do \uD83D\uDE21",
+    "no_relevant_info": "Nejsou k dispozici žádné relevantní informace"
   },
   "TITLE": {
     "filters_by": "Filtrovat podle",
     "show_in_graph": "Zobrazit v grafu",
     "calendar_heatmap": "Kalendář – teplotní mapa",
     "habit_cards": "Karty návyků",
-    "create_new_stat": "Vytvořit novou statistiku"
+    "create_new_stat": "Vytvořit novou statistiku",
+    "selected": "Vybrané",
+    "available": "Dostupné",
+    "top_days": "Nejlepší dny",
+    "top_trackers": "Nejlepší trackery",
+    "number_options": "Počet možností",
+    "enter_type_metric": "Zadejte typ metriky"
   },
   "STATUS": {
     "loading": "Načítání...",
@@ -98,5 +110,30 @@
     "eng": "Angličtina",
     "cz": "Čeština",
     "select_language": "Vyberte jazyk"
+  },
+  "CREATE_NEW_STAT": {
+    "name": "Název",
+    "input_type": "Typ vstupu",
+    "frequency": "Frekvence",
+    "time_of_day": "Část dne",
+    "daily_entries": "Denní záznamy",
+    "color": "Barva",
+    "icon": "Ikona",
+    "category": "Kategorie",
+    "tags": "Štítky",
+    "tracked": "Sledovat"
+  },
+  "CARD": {
+    "series": "Série",
+    "last_day": "Poslední den",
+    "completion": "Procento dokončení"
+  },
+  "NOTIFICATION": {
+    "save": "Vaše data byla úspěšně uložena!",
+    "edit": "Změny byly úspěšně uloženy!",
+    "need_required": "Prosím, vyplňte formulář, abyste mohli pokračovat.",
+    "invalid_image_type": "Neplatný typ obrázku",
+    "invalid_image_size": "Neplatná velikost souboru (> {{max}} MB)",
+    "avatar_upload": "Nahrání avataru selhalo. {{reason}}"
   }
 }

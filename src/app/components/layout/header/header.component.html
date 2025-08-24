@@ -1,7 +1,12 @@
 <div class="header-box">
   @for (i of buttonsIcon; track i) {
     <button class="header-button" [title]="i.alt">
-      <img class="header-icon" [src]="i.src" [alt]="i.alt" />
+      <img
+        class="header-icon"
+        [src]="i.src"
+        [alt]="i.alt"
+        [routerLink]="i.route"
+      />
     </button>
   }
 </div>

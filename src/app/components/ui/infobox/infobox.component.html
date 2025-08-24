@@ -1,0 +1,6 @@
+<div class="infobox">
+  <div class="box-label">{{ info.label | translate }}</div>
+  @for (row of info.rows; track row) {
+    <div class="row-info">{{ row.label }}: {{ row.value }}</div>
+  }
+</div>

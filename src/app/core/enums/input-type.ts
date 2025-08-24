@@ -9,4 +9,5 @@ export enum InputType {
   TIMER,
   EMOJI_SCALE,
   RADIO,
+  INFO_TEXT,
 }

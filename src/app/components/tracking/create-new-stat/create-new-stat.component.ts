@@ -1,10 +1,10 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { InputType } from '../../core/enums/input-type';
-import { Frequency } from '../../core/enums/frequency';
-import { TimeOfDay } from '../../core/enums/time-of-day';
-import { DailyEntries } from '../../core/enums/daily-entries';
-import { FormFieldComponent } from '../form-field/form-field.component';
+import { InputType } from '../../../core/enums/input-type';
+import { Frequency } from '../../../core/enums/frequency';
+import { TimeOfDay } from '../../../core/enums/time-of-day';
+import { DailyEntries } from '../../../core/enums/daily-entries';
+import { FormFieldComponent } from '../../ui/form-field/form-field.component';
 
 @Component({
   selector: 'app-create-new-stat',

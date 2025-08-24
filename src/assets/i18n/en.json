@@ -1,11 +1,13 @@
 {
   "USER": {
-    "login": "Login",
+    "login": "Login:",
     "password": "Password",
     "username": "Username",
     "name": "Name",
     "surname": "Surname",
-    "nickname": "Nickname"
+    "nickname": "Nickname",
+    "birthdate": "Birthday:",
+    "count_track": "Count of trackers:"
   },
   "MENU": {
     "overview": "Overview",
@@ -77,7 +79,9 @@
     "habit_cards": "Habit cards",
     "create_new_stat": "Create a new stat",
     "selected": "Selected",
-    "available": "Available"
+    "available": "Available",
+    "top_days": "Top days",
+    "top_trackers": "Top trackers"
   },
   "STATUS": {
     "loading": "Loading...",

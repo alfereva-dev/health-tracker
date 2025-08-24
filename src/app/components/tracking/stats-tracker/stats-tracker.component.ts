@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { Stat } from '../../core/models/stat';
-import { StatsDefault } from '../../../assets/mock/default-stats';
+import { Stat } from '../../../core/models/stat';
+import { StatsDefault } from '../../../../assets/mock/default-stats';
 import {
   CdkDrag,
   CdkDragDrop,
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { FormFieldComponent } from '../form-field/form-field.component';
+import { FormFieldComponent } from '../../ui/form-field/form-field.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { InputType } from '../../core/enums/input-type';
+import { InputType } from '../../../core/enums/input-type';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({

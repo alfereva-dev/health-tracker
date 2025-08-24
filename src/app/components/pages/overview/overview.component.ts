@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { StatsTrackerComponent } from '../../stats-tracker/stats-tracker.component';
+import { StatsTrackerComponent } from '../../tracking/stats-tracker/stats-tracker.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import dayGridPlugin from '@fullcalendar/daygrid';

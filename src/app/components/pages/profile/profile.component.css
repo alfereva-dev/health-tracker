@@ -1,0 +1,48 @@
+.primary-box {
+  width: auto;
+}
+
+.page-box {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-photo {
+  --avatar-size: 10rem;
+  width: var(--avatar-size);
+  border: 3px solid var(--primary-color);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.icon {
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
+.action-btn {
+  display: flex;
+  background: transparent;
+  border-radius: 15%;
+  padding: 5px;
+}
+
+.infobox {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  gap: 10px;
+}

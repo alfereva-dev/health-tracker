@@ -1,16 +1,16 @@
 import { Component, computed, signal } from '@angular/core';
-import { StatsTrackerComponent } from '../../stats-tracker/stats-tracker.component';
-import { StatsChartComponent } from '../../stats-chart/stats-chart.component';
+import { StatsTrackerComponent } from '../../tracking/stats-tracker/stats-tracker.component';
+import { StatsChartComponent } from '../../tracking/stats-chart/stats-chart.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InputType } from '../../../core/enums/input-type';
-import { FormFieldComponent } from '../../form-field/form-field.component';
+import { FormFieldComponent } from '../../ui/form-field/form-field.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockUsers } from '../../../../assets/mock/user';
 import { buildMonthSummary } from '../../../features/utils/build-month-summary';
 import {
   HabitCardComponent,
   HabitCardData,
-} from '../../habit-card/habit-card.component';
+} from '../../ui/habit-card/habit-card.component';
 import { Entry, parseLocalDate } from '../../../core/models/tracker.model';
 import { TimeOfDay } from '../../../core/enums/time-of-day';
 import { format, startOfMonth, subDays } from 'date-fns';

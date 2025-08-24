@@ -25,8 +25,8 @@ import {
 } from 'date-fns';
 import 'chartjs-adapter-date-fns';
 import { TranslateModule } from '@ngx-translate/core';
-import { MockUsers } from '../../../assets/mock/user';
-import { TimeOfDay } from '../../core/enums/time-of-day';
+import { MockUsers } from '../../../../assets/mock/user';
+import { TimeOfDay } from '../../../core/enums/time-of-day';
 
 Chart.register(...registerables);
 
@@ -45,14 +45,6 @@ type FilterBy = 'categories' | 'tags' | 'time' | 'all';
   styleUrls: ['./stats-chart.component.css'],
 })
 export class StatsChartComponent {
-  constructor() {
-    effect(() => {
-      const date = this.cursor();
-      const range = this.range();
-      queueMicrotask(() => this.periodChange.emit({ date, range }));
-    });
-  }
-
   cursor = signal(new Date());
   @Output() filters = new EventEmitter<{
     filterBy: FilterBy;
@@ -62,6 +54,14 @@ export class StatsChartComponent {
     date: Date;
     range: 'week' | 'month' | 'year';
   }>();
+
+  constructor() {
+    effect(() => {
+      const date = this.cursor();
+      const range = this.range();
+      queueMicrotask(() => this.periodChange.emit({ date, range }));
+    });
+  }
 
   private readonly _filterBy = signal<FilterBy>('all');
   @Input() set filterBy(value: FilterBy) {

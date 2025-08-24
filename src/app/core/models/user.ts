@@ -1,4 +1,6 @@
 import { Stat } from './stat';
+import { Category } from './category';
+import { Tag } from './tag';
 
 export interface User {
   id: number;
@@ -7,5 +9,8 @@ export interface User {
   birthdate: string;
   login: string;
   password: string;
+  avatarUrl?: string;
+  category: Category[];
+  tags: Tag[];
   healthTracker: Stat[];
 }

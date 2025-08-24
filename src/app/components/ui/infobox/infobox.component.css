@@ -1,0 +1,20 @@
+.infobox {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--secondary-color);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.box-label {
+  color: var(--secondary-color);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.row-info {
+  color: var(--secondary-color);
+  font-size: 1em;
+  font-weight: bold;
+}

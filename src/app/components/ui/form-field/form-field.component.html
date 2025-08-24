@@ -136,6 +136,9 @@
             <div class="ff_label">{{ field.infoText | translate }}</div>
           </div>
         }
+        @case (InputType.INFO_TEXT) {
+          <div class="ff_label">{{ field.value }}</div>
+        }
       }
     </span>
   </div>

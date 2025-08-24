@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { StatsTrackerComponent } from '../../stats-tracker/stats-tracker.component';
+import { StatsTrackerComponent } from '../../tracking/stats-tracker/stats-tracker.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { Stat } from '../../../core/models/stat';
 import { SelectedStatsStore } from '../../../features/stats/selected-stats.store';
@@ -7,7 +7,7 @@ import { InputType } from '../../../core/enums/input-type';
 import { Frequency } from '../../../core/enums/frequency';
 import { TimeOfDay } from '../../../core/enums/time-of-day';
 import { DailyEntries } from '../../../core/enums/daily-entries';
-import { CreateNewStatComponent } from '../../create-new-stat/create-new-stat.component';
+import { CreateNewStatComponent } from '../../tracking/create-new-stat/create-new-stat.component';
 import { Colors } from '../../../core/enums/colors';
 import { Emoji } from '../../../core/enums/emoji';
 

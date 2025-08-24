@@ -131,6 +131,9 @@
   "NOTIFICATION": {
     "save": "Your data has been saved successfully!",
     "edit": "Changes have been saved!",
-    "need_required": "Please complete the form to proceed."
+    "need_required": "Please complete the form to proceed.",
+    "invalid_image_type": "Invalid image type",
+    "invalid_image_size": "Invalid file size (> {{max}} MB)",
+    "avatar_upload": "Avatar upload failed. {{reason}}"
   }
 }

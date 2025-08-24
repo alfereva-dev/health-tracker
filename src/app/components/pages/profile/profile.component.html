@@ -4,7 +4,9 @@
       <img
         class="image"
         [src]="
-          avatar.avatarUrl() || user.avatarUrl || 'assets/icons/user-white.svg'
+          avatar.avatarUrl() ||
+          user.avatarUrl ||
+          'assets/icons/app/user-white.svg'
         "
         alt="user"
       />

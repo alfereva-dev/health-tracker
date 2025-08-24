@@ -1,4 +1,7 @@
 <div class="header-box">
+  <button type="button" class="btn action-btn" (click)="toggleLang()">
+    {{ nextLangLabel$ | async }}
+  </button>
   @for (i of buttonsIcon; track i) {
     <button class="header-button" [title]="i.alt">
       <img

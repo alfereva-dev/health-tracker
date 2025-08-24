@@ -1,59 +1,147 @@
-# Client
+========================
+Health Tracker (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+Personal health tracking app built with Angular. Designed to demonstrate frontend skills, UX thinking, and component-based architecture.
 
-## Development server
+Live demo: https://alfereva-dev.github.io/health-tracker/
 
-To start a local development server, run:
+========
+Features
 
-```bash
+Create custom trackers with types: Number, Slider, Emoji Scale, Select, Multiple Choice, Checkbox, Text
+
+Color & icon pickers via enums (Colors, Emoji)
+
+Category (single select) and Tags (multi select) sourced from user data
+
+Calendar overview (FullCalendar) – jump to a date and view/edit entries
+
+Responsive UI — adaptive layouts for mobile, tablet, and desktop (touch-friendly controls, grid-based layout, fluid spacing).
+
+i18n via @ngx-translate/core
+
+Toasts via ngx-toastr
+
+Data persisted to localStorage through a simple UserService
+
+Deployed on GitHub Pages
+
+Stack: Angular 19 (standalone + signals), RxJS, @ng-select/ng-select, ngx-toastr, @ngx-translate, FullCalendar.
+
+===========
+Screenshots
+
+Overview page:
+Desktop: ![overview_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\overview_1.png "overview_computer")
+Mobile: ![overview_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\overview_2.png "overview_modal")
+
+Tracking setting page:
+Desktop: ![tracking_settings_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\tracking_settings_1.png "tracking_settings_computer")
+Mobile: ![tracking_settings_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\tracking_settings_2.png "tracking_settings_mobile")
+
+Statistics page:
+Desktop: ![statistics_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\statistics_1.png "statistics_computer")
+Mobile: ![statistics_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\statistics_2.png "statistics_mobile")
+
+Profile page:
+Desktop: ![profile_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\profile_1.png "profile_computer")
+Mobile: ![profile_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\profile_2.png "profile_mobile")
+
+===============
+Getting Started
+Prerequisites:
+Node.js 18+
+Angular CLI 19.x:
+
+npm i -g @angular/cli
+
+=============
+Install & Run
+npm ci
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+# open http://localhost:4200/
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+=====
+Build
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+# output in dist/client
 
-## Running unit tests
+=====================
+Scripts (cheat-sheet)
+ng serve # dev server
+ng build # production build
+ng test # unit tests (if configured)
+ng generate component name # code scaffolding
+ng generate --help # list schematics
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+=====================
+Scripts (cheat-sheet)
+Internationalization (i18n)
 
-```bash
-ng test
-```
+Translations live in assets/i18n/*.json (e.g. en.json, cz.json).
+constructor(private translate: TranslateService) {
+translate.addLangs(['en','ru','cz']);
+translate.setDefaultLang('en');
+translate.use('en');
+}
 
-## Running end-to-end tests
+Use in templates:
+{{ 'BUTTON.save' | translate }}
+<span [translate]="'HELLO'" [translateParams]="{ name: 'Kristina' }"></span>
 
-For end-to-end (e2e) testing, run:
+===================
+Toast Notifications
+Install (already in project): ngx-toastr
+Global styles:
+/* styles.css */
+@import 'ngx-toastr/toastr';
 
-```bash
-ng e2e
-```
+Usage:
+constructor(private toastr: ToastrService) {}
+this.toastr.success('Saved successfully');
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+==========================
+Project Structure (excerpt)
+src/
+---app/
+------components/
+---------layout/ #header, navigation bar
+---------pages/ #overview, profile, statistics, tracking-settings
+---------tracking/ #create new tracker, stats chart, stats tracker
+---------ui/ #form field, habit card, infobox
+------core/
+---------enums/ #colors, daily entries, emoji, frequency, input type, time of day
+---------models/ #category, form field, tag, tracker.model, tracker, user
+---------services/ #avatar, user
+------feature/
+---------stats/ #selected stats
+---------utils/ #buikd month summary
+------assets/
+---------i18n/ #cz, en
+---------icons/ #action icons, emoji icons, app icons
+---------img/ #screenshots, user
+---------mock/# default stats, user
+------types/ #custom
 
-## Additional Resources
+======================
+Deploy to GitHub Pages
+One-time setup
+npm i -D angular-cli-ghpages
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Build with repo base-href
+ng build --configuration production --base-href /health-tracker/
+
+(Recommended) SPA fallback
+
+# Windows PowerShell
+
+Copy-Item dist\client\index.html dist\client\404.html -Force
+
+Publish
+npx angular-cli-ghpages --dir=dist/client
+
+=============
+Contributing
+Issues and PRs are welcome!

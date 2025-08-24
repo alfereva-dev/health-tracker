@@ -10,6 +10,8 @@ import { StatisticsComponent } from './components/pages/statistics/statistics.co
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { UserService } from './core/services/user.service';
 
+type Lang = 'en' | 'cz';
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -29,14 +31,26 @@ export class AppComponent {
   title = 'client';
 
   constructor(
-    private translate: TranslateService,
+    private readonly translate: TranslateService,
     public userService: UserService,
   ) {}
 
   ngOnInit() {
     this.translate.addLangs(['en', 'cz']);
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    this.translate.setFallbackLang('en');
+
+    const supported: Lang[] = ['en', 'cz'];
+    const saved = localStorage.getItem('lang') as Lang | null;
+    const browser = this.translate.getBrowserLang() as Lang | undefined;
+
+    const initial: Lang =
+      (saved && supported.includes(saved) && saved) ||
+      (browser && supported.includes(browser) && browser) ||
+      'en';
+
+    this.translate.use(initial);
+    document.documentElement.lang = initial;
+
     this.userService.login(1, { reset: true }).subscribe();
   }
 }

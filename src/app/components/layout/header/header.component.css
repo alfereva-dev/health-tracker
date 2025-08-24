@@ -26,3 +26,8 @@
   width: 20px;
   height: 20px;
 }
+
+.btn {
+  height: 3vh;
+  min-width: 3vw;
+}

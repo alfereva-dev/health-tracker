@@ -46,3 +46,9 @@
   width: inherit;
   gap: 10px;
 }
+
+@media (max-width: 940px) {
+  .page-box {
+    flex-direction: column;
+  }
+}

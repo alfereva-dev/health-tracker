@@ -11,6 +11,8 @@ import {
   InfoboxData,
 } from '../../ui/infobox/infobox.component';
 import { Entry } from '../../../core/models/tracker.model';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -23,11 +25,13 @@ export class ProfileComponent {
   error = signal<string | null>(null);
   public user!: User;
   formFields: FormField[] = [];
-  private userSig = signal<User | null>(null);
+  private readonly userSig = signal<User | null>(null);
 
   constructor(
     public avatar: AvatarService,
     private readonly userService: UserService,
+    public toastr: ToastrService,
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -68,13 +72,16 @@ export class ProfileComponent {
   }
 
   private currentStreak(entries: Entry[]): number {
-    const set = new Set(entries.map((e) => e.date));
-    if (set.size === 0) return 0;
+    const datesSet = new Set(entries.map((e) => e.date));
+    if (datesSet.size === 0) return 0;
 
-    const lastKey = [...set].sort().pop()!;
+    const lastKey = Array.from(datesSet)
+      .sort((a, b) => a.localeCompare(b))
+      .at(-1)!;
+
     let cur = parseISO(lastKey);
     let streak = 0;
-    while (set.has(format(cur, 'yyyy-MM-dd'))) {
+    while (datesSet.has(format(cur, 'yyyy-MM-dd'))) {
       streak++;
       cur = subDays(cur, 1);
     }
@@ -152,8 +159,14 @@ export class ProfileComponent {
     this.busy.set(true);
     try {
       await this.avatar.setFromFile(this.user, file);
+      this.toastr.success(this.translate.instant('NOTIFICATION.save'));
     } catch (e: any) {
       this.error.set(e.message ?? 'Upload error');
+      this.toastr.error(
+        this.translate.instant('ERROR.avatar_upload', {
+          reason: e?.message ?? '',
+        }),
+      );
     } finally {
       this.busy.set(false);
       input.value = '';

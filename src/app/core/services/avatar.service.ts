@@ -41,7 +41,7 @@ export class AvatarService {
     }
     const maxMb = 5;
     if (file.size > maxMb * 1024 * 1024) {
-      throw new Error('Invalid file size (> ${maxMb} MB).');
+      throw new Error(`Invalid file size (> ${maxMb} MB)`);
     }
   }
 

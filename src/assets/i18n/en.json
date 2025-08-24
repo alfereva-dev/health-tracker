@@ -127,5 +127,10 @@
     "series": "Series",
     "last_day": "The last day",
     "completion": "Percentage of completion"
+  },
+  "NOTIFICATION": {
+    "save": "Your data has been saved successfully!",
+    "edit": "Changes have been saved!",
+    "need_required": "Please complete the form to proceed."
   }
 }

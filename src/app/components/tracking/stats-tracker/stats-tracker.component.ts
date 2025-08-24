@@ -5,7 +5,6 @@ import {
   Tracker,
 } from '../../../core/models/tracker';
 import { StatsDefault } from '../../../../assets/mock/default-stats';
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { FormFieldComponent } from '../../ui/form-field/form-field.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../../core/services/user.service';
@@ -27,7 +26,7 @@ type FormFieldDef<T = any> = {
 
 @Component({
   selector: 'app-stats-tracker',
-  imports: [FormFieldComponent, CdkDrag, CdkDropList, TranslateModule],
+  imports: [FormFieldComponent, TranslateModule],
   templateUrl: './stats-tracker.component.html',
   styleUrl: './stats-tracker.component.css',
 })

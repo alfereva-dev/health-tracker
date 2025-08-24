@@ -1,20 +1,22 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputType } from '../../../core/enums/input-type';
 import { Frequency } from '../../../core/enums/frequency';
 import { TimeOfDay } from '../../../core/enums/time-of-day';
 import { DailyEntries } from '../../../core/enums/daily-entries';
 import { FormFieldComponent } from '../../ui/form-field/form-field.component';
 import { UserService } from '../../../core/services/user.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Colors } from '../../../core/enums/colors';
 import { Emoji } from '../../../core/enums/emoji';
 import { Tracker } from '../../../core/models/tracker';
+import { ToastrService } from 'ngx-toastr';
 
 type Option<T> = { label: string; value: T };
 
 @Component({
   selector: 'app-create-new-stat',
+  standalone: true,
   imports: [FormFieldComponent, TranslateModule],
   templateUrl: './create-new-tracker.component.html',
   styleUrl: './create-new-tracker.component.css',
@@ -23,15 +25,15 @@ export class CreateNewTrackerComponent {
   @Output() close = new EventEmitter<void>();
   metricControl = new FormControl<string | null>('');
   formGroup = new FormGroup({
-    name: new FormControl<string>(''),
-    inputType: new FormControl(''),
-    frequency: new FormControl(''),
-    timeOfDay: new FormControl(''),
-    dailyEntries: new FormControl(''),
-    color: new FormControl<Colors | null>(null),
-    icon: new FormControl<Emoji | null>(null),
-    category: new FormControl(''),
-    tags: new FormControl(''),
+    name: new FormControl<string>('', Validators.required),
+    inputType: new FormControl('', Validators.required),
+    frequency: new FormControl('', Validators.required),
+    timeOfDay: new FormControl('', Validators.required),
+    dailyEntries: new FormControl('', Validators.required),
+    color: new FormControl<Colors | null>(null, Validators.required),
+    icon: new FormControl<Emoji | null>(null, Validators.required),
+    category: new FormControl<number | null>(null, Validators.required),
+    tags: new FormControl<number[] | null>(null, Validators.required),
     tracked: new FormControl<boolean>(false),
   });
 
@@ -96,6 +98,8 @@ export class CreateNewTrackerComponent {
 
   colorOptions = this.enumToKeyedOptions(Colors, (_key, val) => val);
   emojiOptions = this.enumToKeyedOptions(Emoji, (_key, val) => val);
+  categoryOptions: Option<number>[] = [];
+  tagOptions: Option<number>[] = [];
 
   formField = [
     {
@@ -150,6 +154,20 @@ export class CreateNewTrackerComponent {
       isRequired: true,
     },
     {
+      label: 'CREATE_NEW_STAT.category',
+      formControl: this.formGroup.controls.category,
+      type: InputType.SELECT_DROPDOWN,
+      options: this.categoryOptions,
+      isRequired: true,
+    },
+    {
+      label: 'CREATE_NEW_STAT.tags',
+      formControl: this.formGroup.controls.tags,
+      type: InputType.MULTIPLE_CHOICE,
+      options: this.tagOptions,
+      isRequired: true,
+    },
+    {
       label: 'CREATE_NEW_STAT.tracked',
       formControl: this.formGroup.controls.tracked,
       type: InputType.CHECKBOX,
@@ -158,13 +176,28 @@ export class CreateNewTrackerComponent {
   ];
   saving = false;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    public toastr: ToastrService,
+    public translate: TranslateService,
+  ) {}
 
   ngOnInit() {
-    this.userService.user$.subscribe({
-      next: (detail) => {},
+    this.userService.user$.subscribe((u) => {
+      this.categoryOptions = (u.category ?? []).map((c) => ({
+        value: c.id,
+        label: c.name,
+      }));
+      this.tagOptions = (u.tags ?? []).map((t) => ({
+        value: t.id,
+        label: t.name,
+      }));
+      this.formField.find(
+        (f) => f.label === 'CREATE_NEW_STAT.category',
+      )!.options = this.categoryOptions;
+      this.formField.find((f) => f.label === 'CREATE_NEW_STAT.tags')!.options =
+        this.tagOptions;
     });
-    console.log(this.colorOptions, this.emojiOptions);
   }
 
   enumToKeyedOptions<T extends Record<string, string>>(
@@ -183,10 +216,22 @@ export class CreateNewTrackerComponent {
 
   addNewStat() {
     this.formGroup.markAllAsTouched();
-    if (this.formGroup.invalid) return;
+    if (this.formGroup.invalid) {
+      this.toastr.warning(this.translate.instant('NOTIFICATION.need_required'));
+      return;
+    }
 
     const raw = this.formGroup.getRawValue();
     const inputType = Number(raw.inputType) as InputType;
+
+    const u = this.userService.snapshot!;
+    const allCategories = u.category ?? [];
+    const allTags = u.tags ?? [];
+
+    const categoryObj =
+      allCategories.find((c) => c.id === raw.category!) ?? null;
+    const tagObjs = allTags.filter((t) => (raw.tags ?? []).includes(t.id));
+
     const metric =
       inputType === InputType.NUMBER
         ? this.metricControl.value?.trim() || null
@@ -200,8 +245,8 @@ export class CreateNewTrackerComponent {
       dailyEntries: raw.dailyEntries!,
       color: raw.color as Colors,
       icon: raw.icon as Emoji,
-      category: (raw.category || '').trim() || null,
-      tags: (raw.tags || '').trim() || null,
+      category: categoryObj ? [categoryObj] : [],
+      tags: tagObjs,
       tracked: !!raw.tracked,
       metric,
     } as unknown as Tracker;
@@ -210,6 +255,7 @@ export class CreateNewTrackerComponent {
     this.userService.addHealthTracker(newTracker).subscribe({
       next: () => {
         this.saving = false;
+        this.toastr.info(this.translate.instant('NOTIFICATION.save'));
         this.onCloseClick();
       },
       error: (err) => {
@@ -217,10 +263,6 @@ export class CreateNewTrackerComponent {
         console.error('addHealthTracker failed', err);
       },
     });
-  }
-
-  onOverlayClick() {
-    this.close.emit();
   }
 
   onCloseClick() {

@@ -17,18 +17,18 @@ export class HeaderComponent {
   readonly buttonsIcon = [
     {
       alt: 'health-icon',
-      src: '../../../assets/icons/app/health-icon.svg',
+      src: 'assets/icons/app/health-icon.svg',
       route: '',
     },
     {
       alt: 'profile-icon',
-      src: '../../../assets/icons/app/profile-icon.svg',
+      src: 'assets/icons/app/profile-icon.svg',
       route: '/profile',
     },
     {
       alt: 'settings-icon',
-      src: '../../../assets/icons/app/settings-icon.svg',
-      route: '',
+      src: 'assets/icons/app/settings-icon.svg',
+      route: '/tracking-settings',
     },
   ];
 

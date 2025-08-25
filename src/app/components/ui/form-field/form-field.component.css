@@ -136,6 +136,9 @@
   width: 40vw;
   display: flex;
   justify-content: space-around;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .emoji_button {
@@ -221,4 +224,10 @@ textarea {
 
 .radio-text {
   color: var(--secondary-color);
+}
+
+@media (max-width: 940px) {
+  .emoji_scale {
+    justify-content: center;
+  }
 }

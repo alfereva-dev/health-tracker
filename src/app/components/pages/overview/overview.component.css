@@ -8,7 +8,6 @@ full-calendar {
   display: block;
   width: 100%;
   min-width: 0;
-  height: 640px;
   color: var(--secondary-color);
 }
 
@@ -41,9 +40,4 @@ full-calendar {
   --fc-border-color: var(--secondary-color);
   --fc-today-bg-color: rgba(255, 122, 48, 0.15);
   --fc-neutral-text-color: #cfd3d7;
-}
-
-full-calendar,
-.fc {
-  height: 49vh;
 }

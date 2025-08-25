@@ -59,7 +59,10 @@ export class OverviewComponent {
     selectable: true,
     dateClick: (info) => this.onDateClick(info.dateStr),
     events: [],
-    height: 640,
+    height: 'auto',
+    contentHeight: 'auto',
+    expandRows: true,
+    handleWindowResize: true,
   };
 
   constructor() {

@@ -17,25 +17,21 @@ export class HeaderComponent {
   readonly buttonsIcon = [
     {
       alt: 'health-icon',
-      src: 'assets/icons/app/health-icon.svg',
+      src: 'assets/icons/app/health_icon.svg',
       route: '',
     },
     {
       alt: 'profile-icon',
-      src: 'assets/icons/app/profile-icon.svg',
+      src: 'assets/icons/app/profile_icon.svg',
       route: '/profile',
     },
     {
       alt: 'settings-icon',
-      src: 'assets/icons/app/settings-icon.svg',
+      src: 'assets/icons/app/settings_icon.svg',
       route: '/tracking-settings',
     },
   ];
 
-  readonly langs: Array<{ code: Lang; label: string }> = [
-    { code: 'en', label: 'EN' },
-    { code: 'cz', label: 'CZ' },
-  ];
   nextLangLabel$!: Observable<'EN' | 'CZ'>;
 
   constructor(private readonly translate: TranslateService) {

@@ -30,4 +30,6 @@
 .btn {
   height: 3vh;
   min-width: 3vw;
+  display: flex;
+  align-items: flex-end;
 }

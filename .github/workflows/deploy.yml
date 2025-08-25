@@ -1,43 +1,56 @@
-name: Build & Deploy (GitHub Pages)
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Use Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      - name: Install deps
-        run: npm ci
+      - run: npm ci
 
-      - name: Build Angular (production)
+      # Сборка (важно base-href под репозиторий)
+      - run: npx ng build --configuration production --base-href /health-tracker/
+
+      # (Необязательно, но удобно для диагностики)
+      - name: Show build output
         run: |
-          npm run build -- --configuration production --base-href /health-tracker/
-          # SPA fallback (важно для маршрутов Angular)
-          cp dist/client/index.html dist/client/404.html
+          ls -la dist
+          ls -la dist/client || true
+          ls -la dist/client/browser || true
 
-      - name: Publish to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      # SPA-fallback: 404.html = index.html
+      - name: Create 404 fallback
+        run: cp dist/client/browser/index.html dist/client/browser/404.html
+
+      # Загружаем именно dist/client/browser
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: dist/client
-          force_orphan: true
+          path: dist/client/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

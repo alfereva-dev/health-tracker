@@ -31,21 +31,25 @@ Stack: Angular 19 (standalone + signals), RxJS, @ng-select/ng-select, ngx-toastr
 ===========
 Screenshots
 
-Overview page:
-Desktop: ![overview_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\overview_1.png "overview_computer")
-Mobile: ![overview_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\overview_2.png "overview_modal")
+### Overview page
 
-Tracking setting page:
-Desktop: ![tracking_settings_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\tracking_settings_1.png "tracking_settings_computer")
-Mobile: ![tracking_settings_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\tracking_settings_2.png "tracking_settings_mobile")
+Desktop: ![overview_computer](src/assets/img/screenshots/overview_1.png "overview_computer")
+Mobile:  ![overview_mobile](src/assets/img/screenshots/overview_2.png "overview_modal")
 
-Statistics page:
-Desktop: ![statistics_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\statistics_1.png "statistics_computer")
-Mobile: ![statistics_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\statistics_2.png "statistics_mobile")
+### Tracking settings page
 
-Profile page:
-Desktop: ![profile_1.png](C:\portfolio\health-tracker\src\assets\img\screenshots\profile_1.png "profile_computer")
-Mobile: ![profile_2.png](C:\portfolio\health-tracker\src\assets\img\screenshots\profile_2.png "profile_mobile")
+Desktop: ![tracking_settings_computer](src/assets/img/screenshots/tracking_settings_1.png)
+Mobile:  ![tracking_settings_mobile](src/assets/img/screenshots/tracking_settings_2.png)
+
+### Statistics page
+
+Desktop: ![statistics_computer](src/assets/img/screenshots/statistics_1.png)
+Mobile:  ![statistics_mobile](src/assets/img/screenshots/statistics_2.png)
+
+### Profile page
+
+Desktop: ![profile_computer](src/assets/img/screenshots/profile_1.png)
+Mobile:  ![profile_mobile](src/assets/img/screenshots/profile_2.png)
 
 ===============
 Getting Started
